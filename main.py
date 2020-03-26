@@ -4,6 +4,7 @@ import requests
 import json
 import hashlib
 import datetime
+import time
 
 # data
 lg_url = 'http://hmgr.sec.lit.edu.cn/wms/healthyLogin'
@@ -34,6 +35,8 @@ if lg_response.json()['code'] == 200:
     print('学号: ' + lg_response.json()['data']['teamNo'])
 else:
     print("登陆失败! 请检查学号和密码.")
+    time.sleep(1)
+    quit()
 
 
 # get the last record
