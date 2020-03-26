@@ -54,7 +54,7 @@ lr_response = requests.get(url=lr_url, params=lr_data, headers=lr_headers)
 #print(lr_response.json())
 print('上次提交: ' + lr_response.json()['data']['createTime'])
 
-print('------------------------')
+print('-----------------------------')
 
 # add a new record
 ar_url = 'http://hmgr.sec.lit.edu.cn/wms/addHealthyRecord'
