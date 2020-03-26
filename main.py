@@ -5,7 +5,7 @@ import json
 import hashlib
 
 # data
-url = "http://hmgr.sec.lit.edu.cn/wms/healthyLogin"
+lg_url = 'http://hmgr.sec.lit.edu.cn/wms/healthyLogin'
 username = '' #input your username
 password = '' #input your password
 
@@ -15,20 +15,41 @@ def get_sha256(password: str) -> str:
     return s
 
 # login
-headers = {
+lg_headers = {
+    'Connection': 'application/json',
     'Content-Type': 'application/json',
 }
 
-data = {
+lg_data = {
     'cardNo': username,
     'password': get_sha256(password),
 }
 
-response = requests.post(url=url, data=json.dumps(data), headers=headers, verify=False)
+lg_response = requests.post(url=lg_url, data=json.dumps(lg_data), headers=lg_headers, verify=False)
 
-#print(response.json())
-if response.json()['code'] == 200:
+#print(lg_response.json())
+if lg_response.json()['code'] == 200:
     print("登陆成功!")
-    print('学号: ' + response.json()['data']['teamNo'])
+    print('学号: ' + lg_response.json()['data']['teamNo'])
 else:
     print("登陆失败! 请检查学号和密码.")
+
+
+# get the last record
+lr_url = 'http://hmgr.sec.lit.edu.cn/wms/lastHealthyRecord'
+
+lr_headers = {
+    'Connection': 'application/json',
+    'Content-Type': 'application/json',
+    'token': lg_response.json()['data']['token']
+}
+
+lr_data = {
+    'teamId': lg_response.json()['data']['teamId'],
+    'userId': lg_response.json()['data']['userId'],
+}
+
+lr_response = requests.get(url=lr_url, params=lr_data, headers=lr_headers)
+#print(lr_response.json())
+print('上次提交: ' + lr_response.json()['data']['createTime'])
+
