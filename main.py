@@ -5,18 +5,14 @@ import json
 import hashlib
 
 #login
-
 username = ""
 password = 123456
 
 #md5
-def get_md5(password):
-    m = hashlib.md5()
-    m.update(password)
-    mpwd = m.hexdigest()
-    return mpwd
-
-print(get_md5(b'password'))
+def get_sha256(data) :
+    s1 = hashlib.sha256()
+    s1.update(json.dumps(data).encode())
+    return  s1.hexdigest()
 
 url="http://hmgr.sec.lit.edu.cn/wms/healthyLogin"
 
@@ -26,7 +22,7 @@ headers = {
 
 data = {
     'cardNo': username,
-    'password': get_md5(b'password'),
+    'password': get_sha256(password),
 }
 
 response = requests.post(url=url, data=json.dumps(data), headers=headers, verify=False)
