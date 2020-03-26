@@ -8,7 +8,7 @@ import hashlib
 username = ""
 password = 123456
 
-#md5
+#sha256 for password
 def get_sha256(data) :
     s1 = hashlib.sha256()
     s1.update(json.dumps(data).encode())
