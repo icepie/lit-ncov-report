@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 # _*_ coding:utf-8 _*_
 import requests
 import json
@@ -8,7 +8,7 @@ import time
 
 # data
 lg_url = 'http://hmgr.sec.lit.edu.cn/wms/healthyLogin'
-username = 'B1907xxxx' #input your username
+username = 'B1907XXXX' #input your username
 password = '' #input your password
 
 # sha256 for password
@@ -32,10 +32,10 @@ lg_response = requests.post(url=lg_url, data=json.dumps(lg_data), headers=lg_hea
 #print(lg_response.json())
 if lg_response.json()['code'] == 200:
     print("登陆成功!")
+    print('姓名: ' + lg_response.json()['data']['name'])
     print('学号: ' + lg_response.json()['data']['teamNo'])
 else:
     print("登陆失败! 请检查学号和密码.")
-    time.sleep(1)
     quit()
 
 
@@ -54,7 +54,9 @@ lr_data = {
 }
 
 lr_response = requests.get(url=lr_url, params=lr_data, headers=lr_headers)
+
 #print(lr_response.json())
+
 print('上次提交: ' + lr_response.json()['data']['createTime'])
 
 print('-----------------------------')
@@ -64,6 +66,7 @@ ar_url = 'http://hmgr.sec.lit.edu.cn/wms/addHealthyRecord'
 
 today = datetime.date.today()
 now = datetime.datetime.now().replace(microsecond=0)
+
 
 if str(lr_response.json()['data']['createTime'])[0:10] == str(today):
     print('今日已提交!')
@@ -118,6 +121,7 @@ ar_response = requests.post(url=ar_url,data=json.dumps(ar_data), headers=lr_head
 #print(ar_response.json())
 if ar_response.json()['code'] == 200:
     print("提交成功!")
+    print('体温: ' + lr_response.json()['data']['temperature'] + '℃')
     print('提交时间: ' + str(now))
 else:
     print("提交失败!")
