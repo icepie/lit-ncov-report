@@ -65,6 +65,10 @@ ar_url = 'http://hmgr.sec.lit.edu.cn/wms/addHealthyRecord'
 today = datetime.date.today()
 now = datetime.datetime.now().replace(microsecond=0)
 
+if str(lr_response.json()['data']['createTime'])[0:10] == str(today):
+    print('今日已提交!')
+    quit()
+
 ar_data = {
     'userId': lg_response.json()['data']['teamId'], 
     'teamId': lg_response.json()['data']['userId'], 
