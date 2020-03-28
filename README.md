@@ -1,7 +1,7 @@
 # lit-ncov-report
 洛阳理工学院 “健康状况管控平台” 每日自动上报
 
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/res/run.png) 
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/run.png) 
 ## how to use
 1. 准备好`python3`环境
 2. 安装所需依赖：`pip3 install -r requirements.txt`
