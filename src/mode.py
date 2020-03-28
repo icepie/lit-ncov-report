@@ -14,7 +14,7 @@ def multi_user_report():
         print ("组名: " + user_dict[str(count)]['name'])
         print('-----------------------------')
         while n  < len(user_dict[str(count)]):
-            u = user_dict[str(count)][str(n)]['ur']
+            u = user_dict[str(count)][str(n)]['un']
             p = user_dict[str(count)][str(n)]['pw']
             normal_report(u,p)
             n = n + 1

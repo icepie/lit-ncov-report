@@ -151,4 +151,5 @@ def add_record():
     else:
         print("提交失败!")
 
+# initialize
 _init()

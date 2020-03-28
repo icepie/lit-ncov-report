@@ -6,7 +6,7 @@ import getopt
 from src import mode
 
 def usage():
-    print('main.py -u <username> -p <password> [m]')
+    print('main.py -u <username> -p <password> [-m]')
 
 def main(argv):
     # default account
@@ -43,6 +43,5 @@ def main(argv):
     else:
         normal_report()
         
-
 if __name__ == "__main__":
    main(sys.argv[1:])
