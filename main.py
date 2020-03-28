@@ -43,7 +43,7 @@ def main(argv):
         else:
             # run a normal report (using the lasttemperature)
             if 'filename' in locals().keys():
-                print(filename)
+                print('载入配置: ' + filename)
                 json_dir = filename
             else:
                 json_dir = "config/user.json"

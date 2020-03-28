@@ -57,12 +57,12 @@ def login_web(username, password):
     #print(get_value('lg_response').json())
 
     if get_value('lg_response').json()['code'] == 200:
-        print("登陆成功!")
+        print("[s]登陆成功!")
         print('姓名: ' + get_value('lg_response').json()['data']['name'])
         print('学号: ' + get_value('lg_response').json()['data']['teamNo'])
         return 1
     else:
-        print("登陆失败! 请检查学号和密码.")
+        print("[e]登陆失败! 请检查学号和密码.")
         return 0
         
 # get the last record
