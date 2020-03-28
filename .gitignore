@@ -97,3 +97,6 @@ dmypy.json
 *.bat
 *.ps1
 *.sh
+
+# my config
+config/myuser.json

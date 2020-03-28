@@ -1,10 +1,8 @@
 import json
 from .func import *
 
-json_dir = "config/user.json"
-
 # loding 
-def multi_user_report():
+def multi_user_report(json_dir):
     with open(json_dir, 'r') as fw:
         user_dict = json.load(fw)
 

@@ -16,7 +16,7 @@
 > `main.py -u B9071121 -p  12345678`
 
 #### 批量报告
-> `main -m [-f=<filename>]`
+> `main -m [-f <filename>]`
 
 ##### 例如
 > `main.py -m`

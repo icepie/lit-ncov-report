@@ -6,16 +6,16 @@ import getopt
 from src import mode
 
 def usage():
-    print('main.py -u <username> -p <password> [-m]')
+    print('main.py -u <username> -p <password> [-m][-f <filename>]')
 
 def main(argv):
     # default account
     #username = ''  # input your username
     #password = ''  # input your password
     try:
-        opts, args = getopt.getopt(argv,"hmu:p:",["u=","p="])
+        opts, args = getopt.getopt(argv,"hmf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
-        print('main.py -u <username> -p <password>')
+        usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-h", "-help", "--help") :
@@ -23,8 +23,11 @@ def main(argv):
             sys.exit()
         elif opt in ("-m", "--multi"):
             multi = 1
+        elif opt in ("-f", "--filename"):
+            filename = arg
         elif opt in ("-u", "--username"):
             username = arg
+            print(username)
         elif opt in ("-p", "--password"):
             password = arg
 
@@ -39,7 +42,12 @@ def main(argv):
             usage()
         else:
             # run a normal report (using the lasttemperature)
-            mode.multi_user_report()
+            if 'filename' in locals().keys():
+                print(filename)
+                json_dir = filename
+            else:
+                json_dir = "config/user.json"
+            mode.multi_user_report(json_dir)
     else:
         normal_report()
         
