@@ -27,7 +27,6 @@ def main(argv):
             filename = arg
         elif opt in ("-u", "--username"):
             username = arg
-            print(username)
         elif opt in ("-p", "--password"):
             password = arg
 
