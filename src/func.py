@@ -24,12 +24,12 @@ def _init():
 
 
 def set_value(key,value):
-    """ 定义一个全局变量 """
+    """ set global variable """
     _global_dict[key] = value
 
 
 def get_value(key,defValue=None):
-    """ 获得一个全局变量,不存在则返回默认值 """
+    """ to obtain a global variable, if does not exist, it returns the default value """
     try:
         return _global_dict[key]
     except KeyError:

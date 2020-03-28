@@ -5,8 +5,8 @@
 ## how to use
 1. 准备好`python3`环境
 2. 安装所需依赖：`pip3 install -r requirements.txt` 或者 `make init`
-3. 修改`main.py `内学号和密码
-4. 运行程序:`python3 main.py` 或者 `make run`
+3. 运行程序:`python3 main.py` 或者 `make run`
+4. 使用参数: `-u <username> -p <password> [m]`
 ## todo
 - [x] 登录
 - [x] 报告
