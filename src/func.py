@@ -60,10 +60,11 @@ def login_web(username, password):
         print("登陆成功!")
         print('姓名: ' + get_value('lg_response').json()['data']['name'])
         print('学号: ' + get_value('lg_response').json()['data']['teamNo'])
+        return 1
     else:
         print("登陆失败! 请检查学号和密码.")
-        quit()
-
+        return 0
+        
 # get the last record
 def get_last_record():
 
