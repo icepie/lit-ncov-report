@@ -79,5 +79,7 @@ ps:
 - [ ] 定时报告
 - [x] 批量报告
 ### 提醒模块
-- [x] wechat提醒(基于 `severchan`)
+- [x] wechat提醒(基于 `serverchan`)
 - [ ] tgbot提醒
+### 进阶使用
+- [ ] web管理
