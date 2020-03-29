@@ -74,10 +74,10 @@ ps:
 4. 在 `批量报告` 的基础上添加 `-s` 或者 `--serverchan` 参数即可开启
 ##### 例如
 ```bash
- `main.py -m -s`
+main.py -m -s
 ```
 
-#### wechat提醒
+#### tgbot提醒
 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/tg.png)
 
@@ -96,7 +96,7 @@ ps:
 
 ##### 例如
 ```bash
- main.py -m -t
+main.py -m -t
 ```
 ## todo
 ### 基础功能
