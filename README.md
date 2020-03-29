@@ -54,8 +54,10 @@ ps:
 
 ### remind sever
 > 注意: 只针对多用户模式生效
-
 #### wechat提醒
+
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc.png)
+
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
 2. 打开 `config/user.json｀
 
