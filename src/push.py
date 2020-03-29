@@ -67,8 +67,7 @@ def tg_bot_run():
         print('[e]请检查 config/push.json 中的配置')
         quit()
     tgid = str(push_dict['tgid'])
-
-    print(tgtoken)
+    
     bot = telebot.TeleBot(tgtoken)
 
     desp = ''
