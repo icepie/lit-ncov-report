@@ -57,7 +57,7 @@ ps:
 
 #### wechat提醒
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
-2. 打开 `config/user.json
+2. 打开 `config/user.json｀
 
 ```json
 {
