@@ -7,23 +7,24 @@ import getopt
 from src import func, push, mode
 
 # log system
-class Logger(object):
-    def __init__(self, filename="Default.log"):
-        self.terminal = sys.stdout
-        self.log = open(filename, "a")
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)
-    def flush(self):
-        pass
-sys.stdout = Logger("run.log")
+def logger_run():
+    class Logger(object):
+        def __init__(self, filename="Default.log"):
+            self.terminal = sys.stdout
+            self.log = open(filename, "a")
+        def write(self, message):
+            self.terminal.write(message)
+            self.log.write(message)
+        def flush(self):
+            pass
+    sys.stdout = Logger("run.log")
 
 def usage():
-    print('main.py -u <username> -p <password> [-m][-f <filename>]')
+    print('main.py -u <username> -p <password> [-l] [-m] [-f <filename>]')
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hmstf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hmstlf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -37,6 +38,8 @@ def main(argv):
             serverchan = 1
         elif opt in ("-t", "--tgbot"):
             tgbot = 1
+        elif opt in ("-l", "--log"):
+            log = 1
         elif opt in ("-f", "--filename"):
             filename = arg
         elif opt in ("-u", "--username"):
@@ -50,6 +53,11 @@ def main(argv):
         else:
             usage()
 
+    # if log mode
+    if 'log' in locals().keys():
+        logger_run()
+        
+    # judge run mode
     if 'multi' in locals().keys():
         if 'password' in locals().keys() or 'password' in locals().keys():
             usage()
