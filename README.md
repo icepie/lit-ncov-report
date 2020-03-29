@@ -52,9 +52,30 @@ ps:
 
 前段`1` 和`2`及  `3`为成员序号
 
+### remind sever
+> 注意: 只针对多用户模式生效
+
+#### wechat提醒
+1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
+2. 打开 `config/user.json
+
+```json
+{
+    "sckey": "xxxxxxxxxxxxx"
+}
+ ```
+
+3. 将 `sckey` 替换为你自己的
+4. 在 `批量报告` 的基础上添加 `-s` 或者 `--serverchan` 参数即可开启
+##### 例如
+> `main.py -m -s`
+
 ## todo
+### 基础功能
 - [x] 登录
 - [x] 报告
 - [ ] 定时报告
 - [x] 批量报告
+### 提醒模块
+- [x] wechat提醒(基于 `severchan`)
 - [ ] tgbot提醒

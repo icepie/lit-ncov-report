@@ -3,17 +3,26 @@
 
 import sys
 import getopt
-from src import mode
+from src import func, push, mode
+
+# log system
+class Logger(object):
+    def __init__(self, filename="Default.log"):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a")
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+    def flush(self):
+        pass
+sys.stdout = Logger("run.log")
 
 def usage():
     print('main.py -u <username> -p <password> [-m][-f <filename>]')
 
 def main(argv):
-    # default account
-    #username = ''  # input your username
-    #password = ''  # input your password
     try:
-        opts, args = getopt.getopt(argv,"hmf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hmsf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -23,6 +32,8 @@ def main(argv):
             sys.exit()
         elif opt in ("-m", "--multi"):
             multi = 1
+        elif opt in ("-s", "--serverchan"):
+            serverchan = 1
         elif opt in ("-f", "--filename"):
             filename = arg
         elif opt in ("-u", "--username"):
@@ -43,12 +54,14 @@ def main(argv):
             # run a normal report (using the lasttemperature)
             if 'filename' in locals().keys():
                 print('载入配置: ' + filename)
-                json_dir = filename
+                json_flie = filename
             else:
-                json_dir = "config/user.json"
-            mode.multi_user_report(json_dir)
+                json_flie = "config/user.json"
+                mode.multi_user_report(json_flie)
+                if 'serverchan' in locals().keys():
+                    push.server_chan_run()
     else:
         normal_report()
         
 if __name__ == "__main__":
-   main(sys.argv[1:])
+    main(sys.argv[1:])

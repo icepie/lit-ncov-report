@@ -12,9 +12,15 @@ url = {
 }
 
 # set time
-today = datetime.date.today()
-now = datetime.datetime.now().replace(microsecond=0)
-
+def get_time(t):
+    if t == 'now':
+        return str(datetime.datetime.now().replace(microsecond=0))
+    elif t == 'today':
+        return str(datetime.date.today())
+    else:
+        return None
+        
+    
 # global
 _global_dict = None
 
@@ -57,13 +63,9 @@ def login_web(username, password):
     #print(get_value('lg_response').json())
 
     if get_value('lg_response').json()['code'] == 200:
-        print("[s]登陆成功!")
-        print('姓名: ' + get_value('lg_response').json()['data']['name'])
-        print('学号: ' + get_value('lg_response').json()['data']['teamNo'])
-        return 1
+        return(1)
     else:
-        print("[e]登陆失败! 请检查学号和密码.")
-        return 0
+        return(0)
         
 # get the last record
 def get_last_record():
@@ -89,7 +91,7 @@ def get_last_record():
 
 
 def is_record_today():
-    if str(get_value('lr_response').json()['data']['createTime'])[0:10] == str(today):
+    if str(get_value('lr_response').json()['data']['createTime'])[0:10] == get_time('today'):
         return(1)
     else:
         return(0)
@@ -118,7 +120,7 @@ def add_record():
         'seekMedicalInfo': get_value('lr_response').json()['data']['seekMedicalInfo'], 
         'exceptionalCase': get_value('lr_response').json()['data']['exceptionalCase'], 
         'exceptionalCaseInfo': get_value('lr_response').json()['data']['exceptionalCaseInfo'], 
-        'reportDate': str(today), 
+        'reportDate': get_time('today'), 
         'currentStatus': get_value('lr_response').json()['data']['currentStatus'], 
         'villageIsCase': get_value('lr_response').json()['data']['villageIsCase'], 
         'caseAddress': get_value('lr_response').json()['data']['caseAddress'], 
@@ -140,16 +142,14 @@ def add_record():
         'mobile': get_value('lg_response').json()['data']['mobile']
     }
 
-    ar_response = requests.post(url=url['ar'],data=json.dumps(ar_data), headers= get_value('ar_headers'))
+    set_value('ar_respons',requests.post(url=url['ar'],data=json.dumps(ar_data), headers= get_value('ar_headers')))
 
-    #print(ar_response.json())
+    #print(get_value('ar_response').json())
 
-    if ar_response.json()['code'] == 200:
-        print("提交成功!")
-        print('体温: ' + get_value('lr_response').json()['data']['temperature'] + '℃')
-        print('提交时间: ' + str(now))
+    if get_value('ar_response').json()['code'] == 200:
+        return(1)
     else:
-        print("提交失败!")
+        return(0)
 
 # initialize
 _init()
