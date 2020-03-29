@@ -3,6 +3,7 @@
 
 import sys
 import getopt
+
 from src import func, push, mode
 
 # log system
@@ -22,7 +23,7 @@ def usage():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hmsf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hmstf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -34,6 +35,8 @@ def main(argv):
             multi = 1
         elif opt in ("-s", "--serverchan"):
             serverchan = 1
+        elif opt in ("-t", "--tgbot"):
+            tgbot = 1
         elif opt in ("-f", "--filename"):
             filename = arg
         elif opt in ("-u", "--username"):
@@ -60,6 +63,8 @@ def main(argv):
                 mode.multi_user_report(json_flie)
                 if 'serverchan' in locals().keys():
                     push.server_chan_run()
+                if 'tgbot' in locals().keys():
+                    push.tg_bot_run()
     else:
         normal_report()
         

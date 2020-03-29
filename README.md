@@ -9,18 +9,21 @@
 3. 运行程序:`python3 main.py`
 ### mode
 #### 单用户报告
-> `main.py -u <username> -p <password> `
-
+```bash
+main.py -u <username> -p <password> 
+```
 ##### 例如
- 
-> `main.py -u B9071121 -p  12345678`
-
+```bash
+main.py -u B9071121 -p  12345678
+```
 #### 批量报告
-> `main -m [-f <filename>]`
-
+```bash
+main -m [-f <filename>]
+```
 ##### 例如
-> `main.py -m`
-
+```bash
+main.py -m -f config/myuser.json
+```
 若`-f`参数不存在, 将会加载默认配置文件`config\user.json`
 
 ##### json guide
@@ -40,7 +43,7 @@
         "3":{ "un":"B1907xxxx", "pw": "" }
     }
 }
- ```
+```
 ps:
 请按照该格式修改
 
@@ -59,19 +62,42 @@ ps:
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc.png)
 
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
-2. 打开 `config/user.json｀
+2. 打开 `config/push.json｀
 
 ```json
 {
     "sckey": "xxxxxxxxxxxxx"
 }
- ```
+```
 
 3. 将 `sckey` 替换为你自己的
 4. 在 `批量报告` 的基础上添加 `-s` 或者 `--serverchan` 参数即可开启
 ##### 例如
-> `main.py -m -s`
+```bash
+ `main.py -m -s`
+```
 
+#### wechat提醒
+
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/tg.png)
+
+1. 进入 https://core.telegram.org/bots/api ,按照教程获取你的 `tgtoken` 和 `tgid`
+2. 打开 `config/push.json｀
+
+```json
+{
+    "tgtoken": "xxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "tgid" : "xxxxxxxxx"
+}
+```
+
+3. 将 `tgtoken` 和 `tgid` 替换为你自己的t
+4. 在 `批量报告` 的基础上添加 `-t` 或者 `--tgbot` 参数即可开启
+
+##### 例如
+```bash
+ main.py -m -t
+```
 ## todo
 ### 基础功能
 - [x] 登录
@@ -79,7 +105,7 @@ ps:
 - [ ] 定时报告
 - [x] 批量报告
 ### 提醒模块
-- [x] wechat提醒(基于 `serverchan`)
-- [ ] tgbot提醒
+- [x] wechat提醒(基于 `serverchan` )
+- [x] tgbot提醒
 ### 进阶使用
 - [ ] web管理

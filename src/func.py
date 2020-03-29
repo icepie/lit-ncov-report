@@ -19,8 +19,7 @@ def get_time(t):
         return str(datetime.date.today())
     else:
         return None
-        
-    
+           
 # global
 _global_dict = None
 

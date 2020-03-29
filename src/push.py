@@ -1,6 +1,8 @@
 import json
-from .func import *
+import telebot
 import requests
+
+from .func import *
 
 # server chan 
 # read json flie
@@ -15,7 +17,6 @@ def build_msg(str):
     msg.append(str)
 
 sc_response = None
-
 
 def server_chan_run():
     server_chan_sckey = str(push_dict['sckey']) # http://sc.ftqq.com/3.version
@@ -34,7 +35,7 @@ def server_chan_run():
         #print(desp)
 
         params = {
-            'text': '今日上报任务已完成!!',
+            'text': '今日上报任务已完成!',
             'desp': desp
         }
 
@@ -47,6 +48,39 @@ def server_chan_run():
                 print('[e]server酱 推送失败!')    
                 print(sc_response.json())
         else:
-            print('请检查 config/push.json 中的配置')
+            print('[e]请检查 config/push.json 中的配置')
 
     server_chan_send(msg)
+
+# tgbot push 
+def tg_bot_run():
+    # check tg token
+    if not push_dict['tgtoken']:
+        print('[e]tgtoken未找到')
+        print('[e]请检查 config/push.json 中的配置')
+        quit()
+    tgtoken = str(push_dict['tgtoken'])
+
+    # check tg chat id
+    if not push_dict['tgid']:
+        print('[e]tgid未找到')
+        print('[e]请检查 config/push.json 中的配置')
+        quit()
+    tgid = str(push_dict['tgid'])
+
+    print(tgtoken)
+    bot = telebot.TeleBot(tgtoken)
+
+    desp = ''
+    desp += '# ' + '今日上报任务已完成!' + '\n'
+    desp += '#############################'
+    for d in msg:
+        desp += d + '\n'
+
+    tg_response = bot.send_message(chat_id=tgid, text=desp)
+
+    if tg_response:
+        print('[s]Telegram Bot 推送成功!')
+    else:
+        print('[e]Telegram Bot 推送失败!') 
+        print('[e]请检查 config/push.json 中的配置')
