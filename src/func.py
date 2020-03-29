@@ -86,11 +86,9 @@ def get_last_record():
 
     #print(get_value('lr_response').json())
 
-    print('上次提交: ' + get_value('lr_response').json()['data']['createTime'])
-
 
 def is_record_today():
-    if str(get_value('lr_response').json()['data']['createTime'])[0:10] == get_time('today'):
+    if str(get_value('lr_response').json()['data']['createTime'])[0:10] == str(get_time('today')):
         return(1)
     else:
         return(0)
@@ -141,7 +139,7 @@ def add_record():
         'mobile': get_value('lg_response').json()['data']['mobile']
     }
 
-    set_value('ar_respons',requests.post(url=url['ar'],data=json.dumps(ar_data), headers= get_value('ar_headers')))
+    set_value('ar_response',requests.post(url=url['ar'],data=json.dumps(ar_data), headers= get_value('ar_headers')))
 
     #print(get_value('ar_response').json())
 

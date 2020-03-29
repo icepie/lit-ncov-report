@@ -50,9 +50,11 @@ def normal_report(u,p):
         build_msg('姓名: ' + get_value('lg_response').json()['data']['name'])
         build_msg('学号: ' + get_value('lg_response').json()['data']['teamNo'])
         get_last_record()
+        build_msg('上次提交: ' + get_value('lr_response').json()['data']['createTime'])
         build_msg('            ---               ')
         if is_record_today() == 1:
             build_msg('[s]今日已提交!')
+            msg.append('\r')
             print('-----------------------------')
         else:
             add_record()
@@ -63,7 +65,8 @@ def normal_report(u,p):
                 build_msg('提交时间: ' + get_time('now'))
             else:
                 build_msg("[e]提交失败!")
+                msg.append('\r')
     else:
         build_msg("[e]登陆失败! 请检查学号和密码")
-        msg.append('\r')
+        msg.append('\n')
         print('-----------------------------')
