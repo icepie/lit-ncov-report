@@ -20,7 +20,7 @@ def logger_run():
     sys.stdout = Logger('run.log')
 
 def usage():
-    print('usage: main.py -u <username> -p <password> [-l] [-m] [-f <filename>]')
+    print('usage: main.py -u <username> -p <password> [-f <filename>] [-l] ([-m] [-s] [-t] [-b]) ')
 
 def main(argv):
     try:

@@ -27,7 +27,6 @@ def _init():
     global _global_dict
     _global_dict = {}
 
-
 def set_value(key,value):
     """ set global variable """
     _global_dict[key] = value

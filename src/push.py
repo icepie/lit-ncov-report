@@ -3,6 +3,7 @@ import telebot
 import requests
 
 from .func import *
+from .mode import *
 
 # server chan 
 # read json flie
@@ -20,9 +21,7 @@ def table_tmp():
     return (1)
 
 def build_msg(str):
-    if get_value('table') == 1:
-        msg.append(str)
-    else:
+    if get_value('table') != 1:
         print(str)
     msg.append(str)
 
@@ -34,15 +33,9 @@ def server_chan_run():
         'url': 'https://sc.ftqq.com/{}.send'.format(server_chan_sckey)
     }
 
-    #print("网站名：{name}, 地址 {date}".format(**s ))
-
-    def server_chan_send(msg):
+    def server_chan_send():
         """server chan push log to WeChat"""
-        desp = ''
-        for d in msg:
-            desp += d + '\r' 
-
-        #print(desp)
+        desp = get_value('tbw')
 
         params = {
             'text': '今日上报任务已完成!',
@@ -60,7 +53,7 @@ def server_chan_run():
         else:
             print('[e]请检查 config/push.json 中的配置')
 
-    server_chan_send(msg)
+    server_chan_send()
 
 # tgbot push 
 def tg_bot_run():
@@ -80,13 +73,11 @@ def tg_bot_run():
     
     bot = telebot.TeleBot(tgtoken)
 
-    desp = ''
-    desp += '# ' + '今日上报任务已完成!' + '\n'
-    desp += '#############################'
-    for d in msg:
-        desp += d + '\n'
+    desp = '------------ 今日上报任务已完成! -----------' + '\n'
+    desp += get_value('tbt')
+    desp = '#lnr ' + '\n' + '<pre>' + desp + '</pre>'
 
-    tg_response = bot.send_message(chat_id=tgid, text=desp)
+    tg_response = bot.send_message(chat_id=tgid, text=desp, parse_mode='HTML')
 
     if tg_response:
         print('[s]Telegram Bot 推送成功!')
