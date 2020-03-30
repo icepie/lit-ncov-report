@@ -17,14 +17,14 @@ def logger_run():
             self.log.write(message)
         def flush(self):
             pass
-    sys.stdout = Logger("run.log")
+    sys.stdout = Logger('run.log')
 
 def usage():
-    print('main.py -u <username> -p <password> [-l] [-m] [-f <filename>]')
+    print('usage: main.py -u <username> -p <password> [-l] [-m] [-f <filename>]')
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hmstlf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hmbstlf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
@@ -34,6 +34,8 @@ def main(argv):
             sys.exit()
         elif opt in ("-m", "--multi"):
             multi = 1
+        elif opt in ("-b", "--table"):
+            tab = 1
         elif opt in ("-s", "--serverchan"):
             serverchan = 1
         elif opt in ("-t", "--tgbot"):
@@ -56,7 +58,7 @@ def main(argv):
     # if log mode
     if 'log' in locals().keys():
         logger_run()
-        
+
     # judge run mode
     if 'multi' in locals().keys():
         if 'password' in locals().keys() or 'password' in locals().keys():
@@ -67,6 +69,8 @@ def main(argv):
                 print('载入配置: ' + filename)
                 json_flie = filename
             else:
+                if 'tab' in locals().keys():
+                    push.table_tmp()
                 json_flie = "config/user.json"
                 mode.multi_user_report(json_flie)
                 if 'serverchan' in locals().keys():
@@ -75,6 +79,5 @@ def main(argv):
                     push.tg_bot_run()
     else:
         normal_report()
-        
 if __name__ == "__main__":
     main(sys.argv[1:])

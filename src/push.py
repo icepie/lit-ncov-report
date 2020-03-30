@@ -12,8 +12,18 @@ with open(push_json, 'r') as fw:
     push_dict = json.load(fw)
 
 msg = list()
+
+def table_tmp():
+    print('[s]程序运行中...')
+    print('[s]正在生成结果...')
+    set_value('table',1)
+    return (1)
+
 def build_msg(str):
-    print(str)
+    if get_value('table') == 1:
+        msg.append(str)
+    else:
+        print(str)
     msg.append(str)
 
 sc_response = None
