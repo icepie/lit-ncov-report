@@ -32,6 +32,7 @@ def multi_user_report(jf):
             u = user_dict[str(ct1)][str(n)]['un']
             p = user_dict[str(ct1)][str(n)]['pw']
             # table mode set
+            build_msg('-------------------------------')
             if normal_report(u,p) == 1:
                 if is_record_today() == 1: 
                     tb.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'],str(get_value('lg_response').json()['data']['name']),
@@ -73,7 +74,6 @@ def normal_report(u,p):
         build_msg('- 上次提交: ' + get_value('lr_response').json()['data']['createTime'])
         if is_record_today() == 1:
             build_msg('[s]今日已提交!')
-            build_msg('-------------------------------')
         else:
             add_record()
             if add_record() == 1:
@@ -85,4 +85,4 @@ def normal_report(u,p):
         return(1)
     else:
         build_msg("[e]登陆失败! 请检查学号和密码")
-        build_msg('-------------------------------')
+        
