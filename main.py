@@ -66,7 +66,7 @@ def main(argv):
         else:
             # run a normal report (using the lasttemperature)
             if 'filename' in locals().keys():
-                print('载入配置: ' + filename)
+                print('[c]载入用户配置: ' + filename)
                 json_flie = filename
             else:
                 if 'tab' in locals().keys():
