@@ -3,3 +3,5 @@ init:
 clean:
 	-rm -rf */__pycache__
 	-rm -rf *.log
+build:
+	pyinstaller -F main.py

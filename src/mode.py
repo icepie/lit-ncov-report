@@ -10,12 +10,15 @@ tb = pt.PrettyTable()
 tbtg = pt.PrettyTable()
 tbwx = pt.PrettyTable()
 tbwx.set_style(pt.MSWORD_FRIENDLY)
+tbtg.set_style(pt.MSWORD_FRIENDLY)
 tbtg.border = False
 tb.field_names = ["编号", "学号", "姓名","上次","本次"]
-tbtg.field_names = ["编号", "学号", "姓名","提交进程"]
-tbtg.add_row(['----','----','----','----'])
+tbtg.field_names = ["编号", "学号", "姓名","进程"]
+tbtg.add_row(['---','---','---','---'])
 tbwx.field_names = ["编号", "学号", "姓名","提交进程"]
 tbwx.add_row([':----:',':----:',':----:',':----:'])
+
+
 
 # loding 
 def multi_user_report(jf):
@@ -38,19 +41,19 @@ def multi_user_report(jf):
                     tb.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'],str(get_value('lg_response').json()['data']['name']),
                     str(get_value('lr_response').json()['data']['createTime']), '今日已提交'])
                     tbtg.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'],str(get_value('lg_response').json()['data']['name']),
-                    '今已提交'])
+                    '=今已提交'])
                     tbwx.add_row([user_dict[str(ct1)]['name']+ ':' + str(n)  ,'//' + user_dict[str(ct1)][str(n)]['un'] + '//',str(get_value('lg_response').json()['data']['name']),
                     '//' + '今已提交'])
                 else:
                     tb.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'],str(get_value('lg_response').json()['data']['name']),
                     str(get_value('lr_response').json()['data']['createTime']), '成功! 体温:' + str(get_value('lr_response').json()['data']['temperature']) + '℃' ])                    
                     tbtg.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'],str(get_value('lg_response').json()['data']['name']),
-                    '温度:' + str(get_value('lr_response').json()['data']['temperature']) + '°C' ])  
+                    '√' + str(get_value('lr_response').json()['data']['temperature']) + '°C' ])  
                     tbwx.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),'//' + user_dict[str(ct1)][str(n)]['un'] + '//',str(get_value('lg_response').json()['data']['name']),
-                    '//' + '温度:' + str(get_value('lr_response').json()['data']['temperature']) + '°C' ]) 
+                    '//' + '体温:' + str(get_value('lr_response').json()['data']['temperature']) + '°C' ]) 
             else:
                 tb.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'], '登陆失败', '无法解析', '未知操作'])
-                tbtg.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'], '错误', '未知操作'])
+                tbtg.add_row([user_dict[str(ct1)]['name']+ ':' + str(n),user_dict[str(ct1)][str(n)]['un'], '错误', '×未知操作'])
                 tbwx.add_row([user_dict[str(ct1)]['name']+ ':' + str(n), '//' + user_dict[str(ct1)][str(n)]['un'] + '//', '错误', '//' + '未知操作'])
             n += 1
         else:
@@ -60,9 +63,13 @@ def multi_user_report(jf):
     else:
         build_msg ("[f]所有群组提交操作已完成!")
     if get_value('table') == 1:
+        tb.align["本次"] = "l"
         print(tb)
         print('[f]已生成结果表格')
     # set push message
+    tbtg.align["学号"] = "c"
+    tbtg.align["姓名"] = "c"
+    tbtg.align["进程"] = "l"
     set_value('tbt',str(tbtg))
     set_value('tbw',str(tbwx))
 
