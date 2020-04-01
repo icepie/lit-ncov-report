@@ -86,11 +86,11 @@ def tg_bot_run():
     
     bot = telebot.TeleBot(tgtoken)
 
-    desp = '-------------- 今日上报任务已完成! ------------' + '\n'
+    desp = '#lnr ' + '\n'
+    desp += '-------------- 今日上报任务已完成! ------------' + '\n'
 
-    if get_value('table') == 1:
-        desp += get_value('tbt')
-        desp = '#lnr ' + '\n' + '<pre>' + desp + '</pre>'
+    if get_value('table') == 1: 
+        desp += '<pre>' + get_value('tbt') + '</pre>'
 
         tg_response = bot.send_message(chat_id=tgid, text=desp, parse_mode='HTML')
     else:
