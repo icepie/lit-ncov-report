@@ -31,16 +31,16 @@ main.py -m -f config/myuser.json
 {
     "1": {
         "name":"class1",
-        "1":{ "un":"B1907xxxx", "pw": "" },
-        "2":{ "un":"B1907xxxx", "pw": "" },
-        "3":{ "un":"B1907xxxx", "pw": "" }
+        "1":{ "un":"xxxxxxxxx", "pw": "" },
+        "2":{ "un":"xxxxxxxxx", "pw": "" },
+        "3":{ "un":"xxxxxxxxx", "pw": "" }
     },
 
     "2": {
         "name":"classmate",
-        "1":{ "un":"B1907xxxx", "pw": "" },
-        "2":{ "un":"B1907xxxx", "pw": "" },
-        "3":{ "un":"B1907xxxx", "pw": "" }
+        "1":{ "un":"xxxxxxxxx", "pw": "" },
+        "2":{ "un":"xxxxxxxxx", "pw": "" },
+        "3":{ "un":"xxxxxxxxx", "pw": "" }
     }
 }
 ```
@@ -87,7 +87,7 @@ $icepie:python3 main.py -m -b
 
 ```json
 {
-    "sckey": "xxxxxxxxxxxxx"
+    "sckey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }
 ```
 
@@ -107,7 +107,7 @@ main.py -m -s
 
 ```json
 {
-    "tgtoken": "xxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "tgtoken": "xxxxxxxxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
     "tgid" : "xxxxxxxxx"
 }
 ```
