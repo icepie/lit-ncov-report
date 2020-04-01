@@ -23,10 +23,10 @@ def table_tmp():
     set_value('table',1)
     return (1)
 
-def build_msg(str):
+def build_msg(self):
     if get_value('table') != 1:
-        print(str)
-    msg.append(str)
+        print(self)
+    msg.append(self)
 
 sc_response = None
 
@@ -38,10 +38,20 @@ def server_chan_run():
 
     def server_chan_send():
         """server chan push log to WeChat"""
-        desp = get_value('tbw')
 
+        desp = '#### 结果如下' + '\n'
+        desp += '~~~~'  + '\n'
+
+        if get_value('table') == 1:
+            desp += get_value('tbw')
+        else:
+            for d in msg:
+                desp += d + '\n' +'\n'
+            desp += '~~~~'  + '\n'
+            desp += '[项目](https://github.com/icepie/lit-ncov-report)'  + '\n'
+           
         params = {
-            'text': '今日上报任务已完成!',
+            'text': '今日上报任务已完成',
             'desp': desp
         }
 
@@ -76,11 +86,19 @@ def tg_bot_run():
     
     bot = telebot.TeleBot(tgtoken)
 
-    desp = '------------ 今日上报任务已完成! -----------' + '\n'
-    desp += get_value('tbt')
-    desp = '#lnr ' + '\n' + '<pre>' + desp + '</pre>'
+    desp = '#lnr ' + '\n'
+    desp += '-------------- 今日上报任务已完成! ------------' + '\n'
 
-    tg_response = bot.send_message(chat_id=tgid, text=desp, parse_mode='HTML')
+    if get_value('table') == 1:
+        desp += get_value('tbt')
+        desp = '<pre>' + desp + '</pre>'
+
+        tg_response = bot.send_message(chat_id=tgid, text=desp, parse_mode='HTML')
+    else:
+        desp += '+++++++++++++++++++++++++++++++' + '\n'
+        for d in msg:
+            desp += d + '\n'
+        tg_response = bot.send_message(chat_id=tgid, text=desp)
 
     if tg_response:
         print('[s]Telegram Bot 推送成功!')

@@ -26,7 +26,7 @@ def usage():
     print('usage: main.py -u <username> -p <password> [-f <filename>] [-l] ([-m] [-s] [-t] [-b]) ')
 
 def version():
-    print('lit-ncov-report v1.5')
+    print('lit-ncov-report v1.8')
 
 def main(argv):
     try:
@@ -59,7 +59,7 @@ def main(argv):
             password = arg
 
     def normal_report():
-        if 'password' in locals().keys() and 'password' in locals().keys():
+        if 'username' in locals().keys() and 'password' in locals().keys():
             mode.normal_report(username,password)
         else:
             usage()
@@ -70,23 +70,29 @@ def main(argv):
 
     # judge run mode
     if 'multi' in locals().keys():
-        if 'password' in locals().keys() or 'password' in locals().keys():
-            usage()
+        # run a normal report (using the lasttemperature)
+        if 'filename' in locals().keys():
+            print('[c]载入用户配置: ' + filename)
+            json_flie = filename
         else:
-            # run a normal report (using the lasttemperature)
-            if 'filename' in locals().keys():
-                print('[c]载入用户配置: ' + filename)
-                json_flie = filename
-            else:
-                if 'tab' in locals().keys():
-                    push.table_tmp()
-                json_flie = os.path.join(current_path, 'config/user.json')
-                mode.multi_user_report(json_flie)
-                if 'serverchan' in locals().keys():
-                    push.server_chan_run()
-                if 'tgbot' in locals().keys():
-                    push.tg_bot_run()
+            if 'tab' in locals().keys():
+                push.table_tmp()
+            json_flie = os.path.join(current_path, 'config/user.json')
+            mode.multi_user_report(json_flie)
     else:
         normal_report()
+
+    # tab verification
+    if 'tab' in locals().keys() and 'multi' not in locals().keys():
+        print('[e]table must be run in multi-user mode')
+
+    # push message
+    if 'username' in locals().keys() and 'password' in locals().keys() or 'multi' in locals().keys():
+        if 'serverchan' in locals().keys():
+            push.server_chan_run()
+        if 'tgbot' in locals().keys():
+            push.tg_bot_run()
+
+# main function
 if __name__ == "__main__":
     main(sys.argv[1:])

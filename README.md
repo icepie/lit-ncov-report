@@ -59,7 +59,7 @@ ps:
 前段`1` 和`2`及 `3`为成员序号
 ### table show
 添加参数 `-b` 即可输出结果表格
-> 注意: 只针对多用户模式生效
+> 注意: 只针对多用户模式生效且支持提醒模块
 ##### 例如
 ```bash
 $icepie:python3 main.py -m -b
@@ -79,11 +79,11 @@ $icepie:python3 main.py -m -b
 ```
 
 ### remind sever
-> 注意: 只针对多用户模式生效
 #### wechat提醒
 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc1.png) 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc2.png)
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc3.png)
 
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
 2. 打开 `config/push.json`
@@ -136,7 +136,7 @@ main.py -m -t
 - [x] 定时上报
 - [x] 批量上报
 - [x] 表格生成
-### 提醒模块
+### 推送模块
 - [x] wechat提醒(基于 `serverchan` )
 - [x] tgbot提醒
 ### 进阶使用
