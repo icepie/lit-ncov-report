@@ -8,7 +8,7 @@
 2. 安装所需依赖：`pip3 install -r requirements.txt` 或者 `make init`
 3. 运行程序:`python3 main.py`
 ### mode
-#### 单用户报告
+#### 单用户上报
 ```bash
 main.py -u <username> -p <password> 
 ```
@@ -16,7 +16,7 @@ main.py -u <username> -p <password>
 ```bash
 main.py -u B9071121 -p  12345678
 ```
-#### 批量报告
+#### 批量上报
 ```bash
 main -m [-f <filename>]
 ```
@@ -79,7 +79,7 @@ $icepie:python3 main.py -m -b
 > 注意: 只针对多用户模式生效
 #### wechat提醒
 
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc1.png)
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc1.png) 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc2.png)
 
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
@@ -119,12 +119,19 @@ main.py -m -s
 ```bash
 main.py -m -t
 ```
+
+### 定时上报
+1. 打开 `task.py`  查看并修改确认配置
+2. 终端输入 `python3 task.py` 或者 `make task` 运行
+3. 在 `config/jobs.conf` 可查看运行情况
+4 可使用`supervisor`守护该脚本的进程
+
 ## todo
 ### 基础功能
 - [x] 登录
-- [x] 报告
-- [x] 定时报告
-- [x] 批量报告
+- [x] 上报
+- [x] 定时上报
+- [x] 批量上报
 - [x] 表格生成
 ### 提醒模块
 - [x] wechat提醒(基于 `serverchan` )

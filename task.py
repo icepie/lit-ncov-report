@@ -6,11 +6,11 @@ from src import crontab, crontab_run
 
 # main
 if __name__ == '__main__':
-    # 每天17点30分运行一次'executor script1 argv1'
+    # 每天00点00分10秒运行一次'executor script1 argv1'
     executor='python3'
     script1 = 'main.py'
-    argv1 = '-m -t' 
-    crontab.every('day').at(hour=12, minute=3, second=30).execute(script1,executor,argv1)
+    argv1 = '-m -t -s' 
+    crontab.every('day').at(hour=0, minute=0, second=10).execute(script1,executor,argv1)
     
     # 每5分钟运行一次script2
     #script2 = '/opt/scrapy_news.py'
