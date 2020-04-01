@@ -75,10 +75,10 @@ def main(argv):
             print('[c]载入用户配置: ' + filename)
             json_flie = filename
         else:
-            if 'tab' in locals().keys():
-                push.table_tmp()
             json_flie = os.path.join(current_path, 'config/user.json')
-            mode.multi_user_report(json_flie)
+        if 'tab' in locals().keys():
+            push.table_tmp()
+        mode.multi_user_report(json_flie)
     else:
         normal_report()
 
