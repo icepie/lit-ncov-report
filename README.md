@@ -121,10 +121,10 @@ main.py -m -t
 ```
 
 ### 定时上报
-1. 打开 `task.py`  查看并修改确认配置
+1. 打开 `task.py` 查看并修改确认配置
 2. 终端输入 `python3 task.py` 或者 `make task` 运行
 3. 在 `config/jobs.conf` 可查看运行情况
-4 可使用`supervisor`守护该脚本的进程
+4. 可使用`supervisor`守护该脚本的进程
 
 ## todo
 ### 基础功能
