@@ -30,12 +30,12 @@ def version():
 
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hvmbstlf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hvmbstlf:u:p:",["help","version","multi","table","filename=","username=","password=","tgbot","serverchan","log"])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
     for opt, arg in opts:
-        if opt in ("-h", "-help", "--help") :
+        if opt in ("-h", "--help") :
             usage()
             sys.exit()
         elif opt in ("-v", "--version"):
