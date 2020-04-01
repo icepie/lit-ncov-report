@@ -2,6 +2,10 @@
 洛阳理工学院 “健康状况管控平台” 每日自动上报程序
 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/run.png) 
+## ~~fbi~~ warning!!
+1. 本程序上报的信息均为上次用户自己上报的信息(包括体温)!
+2. 仅作为交流使用, 不可商用盗用!
+
 ## how to use
 ### to prepare
 1. 准备好`python3`环境
@@ -35,7 +39,6 @@ main.py -m -f config/myuser.json
         "2":{ "un":"xxxxxxxxx", "pw": "" },
         "3":{ "un":"xxxxxxxxx", "pw": "" }
     },
-
     "2": {
         "name":"classmate",
         "1":{ "un":"xxxxxxxxx", "pw": "" },
