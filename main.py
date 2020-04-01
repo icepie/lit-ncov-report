@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 # _*_ coding:utf-8 _*_
 
+import os
 import sys
 import getopt
 
 from src import func, push, mode
+
+current_path = os.path.dirname(os.path.abspath(__file__))
 
 # log system
 def logger_run():
@@ -17,20 +20,26 @@ def logger_run():
             self.log.write(message)
         def flush(self):
             pass
-    sys.stdout = Logger('run.log')
+    sys.stdout = Logger(os.path.join(current_path, 'log/run.log'))
 
 def usage():
     print('usage: main.py -u <username> -p <password> [-f <filename>] [-l] ([-m] [-s] [-t] [-b]) ')
 
+def version():
+    print('v1.5')
+
 def main(argv):
     try:
-        opts, args = getopt.getopt(argv,"hmbstlf:u:p:",["help","filename=","username=","password="])
+        opts, args = getopt.getopt(argv,"hvmbstlf:u:p:",["help","filename=","username=","password="])
     except getopt.GetoptError:
         usage()
         sys.exit(2)
     for opt, arg in opts:
         if opt in ("-h", "-help", "--help") :
             usage()
+            sys.exit()
+        elif opt in ("-v", "--version"):
+            version()
             sys.exit()
         elif opt in ("-m", "--multi"):
             multi = 1
@@ -71,7 +80,7 @@ def main(argv):
             else:
                 if 'tab' in locals().keys():
                     push.table_tmp()
-                json_flie = "config/user.json"
+                json_flie = os.path.join(current_path, 'config/user.json')
                 mode.multi_user_report(json_flie)
                 if 'serverchan' in locals().keys():
                     push.server_chan_run()

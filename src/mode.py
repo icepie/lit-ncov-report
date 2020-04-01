@@ -18,8 +18,6 @@ tbtg.add_row(['---','---','---','---'])
 tbwx.field_names = ["编号", "学号", "姓名","提交进程"]
 tbwx.add_row([':----:',':----:',':----:',':----:'])
 
-
-
 # loding 
 def multi_user_report(jf):
     with open(jf, 'r') as fw:

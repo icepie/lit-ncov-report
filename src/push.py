@@ -1,3 +1,4 @@
+import os
 import json
 import telebot
 import requests
@@ -5,9 +6,11 @@ import requests
 from .func import *
 from .mode import *
 
+current_path = os.path.dirname(os.path.abspath(__file__))
+
 # server chan 
 # read json flie
-push_json = 'config/push.json'
+push_json = os.path.join(current_path, '../config/push.json')
 
 with open(push_json, 'r') as fw:
     push_dict = json.load(fw)

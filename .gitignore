@@ -22,6 +22,7 @@ wheels/
 *.spec
 
 # Log files
+log
 pip-log.txt
 pip-delete-this-directory.txt
 *.log
