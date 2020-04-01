@@ -6,4 +6,4 @@ clean:
 build:
 	pyinstaller -F main.py
 task:
-	python task.py
+	python3 task.py
