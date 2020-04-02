@@ -122,6 +122,13 @@ main.py -m -s
 ```bash
 main.py -m -t
 ```
+##### proxy
+1. 国内网络环境启用 `tgbot提醒` 需要开启代理模式
+2. 打开 `src/push.py`
+3. 将以下内容修改并去掉注释(代理地址支持 `http` 以及 `socks`)
+```python
+telebot.apihelper.proxy = {'https':'代理地址'}
+```
 
 ### 定时上报
 1. 打开 `task.py` 查看并修改确认配置

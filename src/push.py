@@ -6,6 +6,9 @@ import requests
 from .func import *
 from .mode import *
 
+# tg push proxy
+#telebot.apihelper.proxy = {'https':'socks5://127.0.0.1:1080'}
+
 current_path = os.path.dirname(os.path.abspath(__file__))
 
 # server chan 
@@ -89,8 +92,7 @@ def tg_bot_run():
     desp = '#lnr ' + '\n'
 
     if get_value('table') == 1: 
-        desp +=  '-------------- 今日上报任务已完成! ------------' + '\n' + '<pre>' + get_value('tbt') + '</pre>'
-        
+        desp +=  '<pre>' + '-------------- 今日上报任务已完成! ------------' + '\n' + get_value('tbt') + '</pre>'
         tg_response = bot.send_message(chat_id=tgid, text=desp, parse_mode='HTML')
     else:
         desp +=  '-------------- 今日上报任务已完成! ------------' + '\n'
