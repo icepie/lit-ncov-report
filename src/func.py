@@ -78,8 +78,6 @@ def get_last_record():
                             (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
     }
     
-    
-    
     set_value('ar_headers',lr_headers)
 
     lr_data = {
@@ -87,7 +85,7 @@ def get_last_record():
         'userId': get_value('lg_response').json()['data']['userId'],
     }
 
-    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers,verify=False))
+    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers,verify=False,timeout=None))
 
     #print(get_value('lr_response').json())
 
