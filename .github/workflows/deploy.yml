@@ -25,7 +25,4 @@ jobs:
         pip install -r requirements.txt
     - name: Run
       run: |
-        python3 main.py -u $USER_NAME -p $USER_PASS
-      env:
-        USER_NAME: ${{ secrets.USER_NAME }}
-        USER_PASS: ${{ secrets.USER_PASS }}
+        python3 main.py -u '${{ secrets.USER_NAME }}' -p '${{ secrets.USER_PASS }}' 
