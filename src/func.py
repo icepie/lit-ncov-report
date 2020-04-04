@@ -87,7 +87,7 @@ def get_last_record():
         'userId': get_value('lg_response').json()['data']['userId'],
     }
 
-    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers))
+    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers,verify=False))
 
     #print(get_value('lr_response').json())
 
