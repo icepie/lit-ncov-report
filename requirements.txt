@@ -1,4 +1,4 @@
-requests
+requests[socks]
 prettytable
 telebot
 pyTelegramBotAPI
