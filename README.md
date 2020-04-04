@@ -135,13 +135,14 @@ telebot.apihelper.proxy = {'https':'代理地址'}
 2. 终端输入 `python3 task.py` 或者 `make task` 运行
 3. 在 `config/jobs.conf` 可查看运行情况
 4. 可使用`supervisor`守护该脚本的进程
+5. ~~使用`github actions`正在开发中~~
 
 ## todo
 ### 基础功能
 - [x] 登录
 - [x] 上报
 - [x] 定时上报
-- [x] 批量上报
+- [x] 批量上报s
 - [x] 表格生成
 ### 推送模块
 - [x] wechat提醒(基于 `serverchan` )

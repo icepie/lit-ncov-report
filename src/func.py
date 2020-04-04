@@ -47,7 +47,7 @@ def get_sha256(password: str) -> str:
 # login web
 def login_web(username, password):
     lg_headers = {
-        'Connection': 'application/json',
+        'Connection': 'keep-alive',
         'Content-Type': 'application/json',
     }
 
@@ -69,15 +69,21 @@ def login_web(username, password):
 def get_last_record():
     
     lr_headers = {
-        'Connection': 'close',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        'Connection': 'keep-alive',
         'Content-Type': 'application/json',
         'token': get_value('lg_response').json()['data']['token'],
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 \
-                            (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
     }
     
+    #lr_headers = {
+        #'Connection': 'close',
+        #'Accept-Encoding': 'gzip, deflate, br',
+        #'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+        #'Content-Type': 'application/json',
+        #'token': get_value('lg_response').json()['data']['token'],
+        #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 \
+                            #(KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36'
+    #}
+
     set_value('ar_headers',lr_headers)
 
     lr_data = {
@@ -85,7 +91,7 @@ def get_last_record():
         'userId': get_value('lg_response').json()['data']['userId'],
     }
 
-    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers,verify=False,timeout=None))
+    set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers))
 
     #print(get_value('lr_response').json())
 
