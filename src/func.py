@@ -47,7 +47,7 @@ def get_sha256(password: str) -> str:
 # login web
 def login_web(username, password):
     lg_headers = {
-        'Connection':'close',
+        'Connection':'keep-alive',
         'Content-Type': 'application/json'
     }
 
