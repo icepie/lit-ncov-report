@@ -47,13 +47,13 @@ def get_sha256(password: str) -> str:
 # login web
 def login_web(username, password):
     lg_headers = {
-        'Connection': 'keep-alive',
-        'Content-Type': 'application/json',
+        'Connection':'close',
+        'Content-Type': 'application/json'
     }
 
     lg_data = {
         'cardNo': username,
-        'password': get_sha256(password),
+        'password': get_sha256(password)
     }
 
     set_value('lg_response',requests.post(url=url['lg'], data=json.dumps(lg_data), headers=lg_headers, verify=False))
@@ -71,7 +71,7 @@ def get_last_record():
     lr_headers = {
         'Connection': 'keep-alive',
         'Content-Type': 'application/json',
-        'token': get_value('lg_response').json()['data']['token'],
+        'token': get_value('lg_response').json()['data']['token']
     }
     
     #lr_headers = {
@@ -88,7 +88,7 @@ def get_last_record():
 
     lr_data = {
         'teamId': get_value('lg_response').json()['data']['teamId'],
-        'userId': get_value('lg_response').json()['data']['userId'],
+        'userId': get_value('lg_response').json()['data']['userId']
     }
 
     set_value('lr_response',requests.get(url=url['lr'], params=lr_data, headers=lr_headers))
