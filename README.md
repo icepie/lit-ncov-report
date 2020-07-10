@@ -115,7 +115,7 @@ main.py -m -s
 }
 ```
 
-3. 将 `tgtoken` 和 `tgid` 替换为你自己的t
+3. 将其中的 `tgtoken` 和 `tgid` 替换为你自己bot的
 4. 在 `批量报告` 的基础上添加 `-t` 或者 `--tgbot` 参数即可开启
 
 ##### 例如
@@ -137,12 +137,15 @@ telebot.apihelper.proxy = {'https':'代理地址'}
 4. 可使用`supervisor`守护该脚本的进程
 5. ~~使用`github actions`正在开发中~~
 
+### 其他
+若要求每日在Q群发送提交图片的话, 参考[mirai-bot-fun](https://github.com/icepie/mirai-bot-fun)
+
 ## todo
 ### 基础功能
 - [x] 登录
 - [x] 上报
 - [x] 定时上报
-- [x] 批量上报s
+- [x] 批量上报
 - [x] 表格生成
 ### 推送模块
 - [x] wechat提醒(基于 `serverchan` )
