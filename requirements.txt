@@ -1,4 +1,4 @@
 requests[socks]
 prettytable
-telebot
 pyTelegramBotAPI
+GB2260
