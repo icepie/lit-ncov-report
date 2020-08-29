@@ -29,4 +29,4 @@ jobs:
         USER_PASS: ${{ secrets.USER_PASS }}
         http_proxy: http://120.26.208.102:88
       run: |
-        python3 main.py -u $USER_NAME -p $USER_PASS
+        export LANG="zh_CN.UTF-8" && python3 main.py -u $USER_NAME -p $USER_PASS
