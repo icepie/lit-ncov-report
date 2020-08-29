@@ -25,8 +25,8 @@ jobs:
         pip install -r requirements.txt
     - name: Init system env
       run: |
-        rm -rf /etc/localtime
-        ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+        sudo rm -rf /etc/localtime
+        sudo ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
     - name: Run
       env: # Or as an environment variable
         USER_NAME: ${{ secrets.USER_NAME }}
