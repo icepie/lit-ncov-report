@@ -27,5 +27,6 @@ jobs:
       env: # Or as an environment variable
         USER_NAME: ${{ secrets.USER_NAME }}
         USER_PASS: ${{ secrets.USER_PASS }}
+        http_proxy: http://120.26.208.102:88
       run: |
         python3 main.py -u $USER_NAME -p $USER_PASS
