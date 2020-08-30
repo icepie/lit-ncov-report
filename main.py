@@ -26,7 +26,7 @@ def usage():
     print('usage: main.py -u <username> -p <password> [-f <filename>] [-l] ([-m] [-s] [-t] [-b]) ')
 
 def version():
-    print('lit-ncov-report v1.8')
+    print('lit-ncov-report v1.9, by icepie@github')
 
 def main(argv):
     try:
