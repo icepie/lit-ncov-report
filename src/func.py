@@ -112,6 +112,12 @@ def is_record_today():
     else:
         return(0)
 
+def cl_build(): # if currentCity can not be transform, then use currentCity
+    try:
+        return(current_location(get_value('lr_response').json()['data']['currentDistrict']))
+    except:
+        return(current_location(get_value('lr_response').json()['data']['currentCity']))
+
 def add_record():
     ar_data =  {
         'mobile': get_value('lg_response').json()['data']['mobile'],
@@ -123,7 +129,7 @@ def add_record():
         'currentProvince': get_value('lr_response').json()['data']['currentProvince'],
         'currentCity': get_value('lr_response').json()['data']['currentCity'],
         'currentDistrict': get_value('lr_response').json()['data']['currentDistrict'],
-        'currentLocation': current_location(get_value('lr_response').json()['data']['currentDistrict']),
+        'currentLocation': cl_build(),
         'currentAddress': get_value('lr_response').json()['data']['currentAddress'],
         'villageIsCase': get_value('lr_response').json()['data']['villageIsCase'],
         'caseAddress': get_value('lr_response').json()['data']['caseAddress'],
