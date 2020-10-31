@@ -2,6 +2,11 @@
 洛阳理工学院 “健康状况管控平台” 每日自动上报程序
 
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/run.png) 
+
+## eof
+本branch为最初的版本, 已迭代至1.9, 因个人的一些原因已停止其开发生命周期, 将会抽空重构此项目~
+并会使用golang设计一款go风格的同类软件[lit-healthy-go](https://github.com/icepie/lit-healthy-go)
+
 ## ~~fbi~~ warning!!
 1. 本程序上报的信息均为上次用户自己上报的信息(包括体温)!
 2. 仅作为交流使用, 不可商用盗用!
