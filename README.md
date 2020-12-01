@@ -5,7 +5,7 @@
 
 ## eof
 本branch为最初的版本, 已迭代至1.9, 因个人的一些原因已停止其开发生命周期, 将会抽空重构此项目~
-并会使用golang设计一款go风格的同类软件[lit-healthy-go](https://github.com/icepie/lit-healthy-go)
+并会使用golang设计一款go风格的同类软件[lit-health-go](https://github.com/icepie/lit-health-go)
 
 ## ~~fbi~~ warning!!
 1. 本程序上报的信息均为上次用户自己上报的信息(包括体温)!
