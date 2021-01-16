@@ -8,6 +8,6 @@ if testme.is_logined:
     print(testme.get_familys())
     print(testme.get_trips())
     print(testme.get_important_city())
-    print(testme.first_record(mode='last', times=1))
+    print(testme.first_record(mode='manual', times=1))
     print(testme.second_record(mode='manual', temperature=36.6))
     print(testme.third_record(mode='random'))

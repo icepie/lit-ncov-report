@@ -247,7 +247,7 @@ class litUesr:
         last_record = self.get_last_record()
 
         data = {
-            'healthyRecordId': util.random_recordId(),
+            'healthyRecordId': last_record['id'],
             'temperature': last_record['temperatureTwo'],
             'temperatureNormal': last_record['temperatureNormal']
         }
@@ -284,7 +284,7 @@ class litUesr:
         last_record = self.get_last_record()
 
         data = {
-            'healthyRecordId': util.random_recordId(),
+            'healthyRecordId': last_record['id'],
             'temperature': last_record['temperatureThree'],
             'temperatureNormal': last_record['temperatureNormal']
         }

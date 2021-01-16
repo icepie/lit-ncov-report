@@ -37,8 +37,5 @@ def current_location(currentDistrict, currentCity):
         return None
     return cl
 
-def random_recordId():
-    return random.randint(1e+6, 1e+7)
-
 def random_temp():
     return round(random.uniform(36.0,37.2), 2)
