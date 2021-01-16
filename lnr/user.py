@@ -12,10 +12,13 @@ class litUesr:
 
     def __init__(self, username: str, password: str):
         self.username = username
-        self.password = password
+        self.password = util.get_sha256(password)
         self.info = self.__login()
-        #self.token = self.info()['token']
-        print(self.info)
+        try:
+            self.token = self.info['token']
+            self.is_logined = True
+        except:
+            self.is_logined = False
 
     def __login(self):
         lg_headers = {
@@ -25,18 +28,14 @@ class litUesr:
 
         lg_data = {
             'cardNo': self.username,
-            'password': util.get_sha256(self.password)
+            'password': self.password
         }
 
         # login func
         try:
             lg_response = requests.post(
                 url=endpoints['lg'], data=json.dumps(lg_data), headers=lg_headers)
-            if lg_response.text.json()['success'] == 'true':
-                res = lg_response.text.json()['data']
-            else:
-                res = None
+            res = lg_response.json()['data']
         except:
             res = None
         return res
-
