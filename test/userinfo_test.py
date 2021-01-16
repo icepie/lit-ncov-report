@@ -1,3 +1,4 @@
+from lnr.user import litUesr
 
 testme = litUesr("B19070404", "xxxxxx")
 if testme.is_logined:
@@ -5,3 +6,4 @@ if testme.is_logined:
     print(testme.get_last_record())
     print(testme.get_instructor())
     print(testme.get_familys())
+    print(testme.get_trips())

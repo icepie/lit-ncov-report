@@ -101,3 +101,23 @@ class litUesr:
         except:
             res = None
         return res
+
+    def get_trips(self):
+        headers = {
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json;charset=UTF-8',
+            'token': self.token,
+        }
+
+        data = {
+            'userId': self.info['userId'],
+            'teamId': self.info['teamId'],
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints['tp'], params=data, headers=headers)
+            res = response.json()['data']
+        except:
+            res = None
+        return res

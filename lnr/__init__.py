@@ -7,6 +7,6 @@ endpoints = {
     'lr': hostname + '/lastHealthyRecord',
     'ar': hostname + '/addHealthyRecord',
     'gi': hostname +'/getInstructor',
-    'fp': hostname + '/familys/personal'
+    'fp': hostname + '/familys/personal',
+    'tp': hostname + '/trips/personal'
 }
-
