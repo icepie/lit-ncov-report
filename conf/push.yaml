@@ -1,0 +1,12 @@
+
+
+tgbot:
+  #proxy support http, https and sock
+  proxy_type: 'sock' 
+  proxy_url: '127.0.0.1:1080'
+  tgtoken: ''
+  tgid: ''
+
+serverchan:
+  sckey: ''
+
