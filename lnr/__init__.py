@@ -3,15 +3,15 @@ hostname = 'http://hmgr.sec.lit.edu.cn/wms'
 
 # the main api
 endpoints = {
-    'lg': hostname + '/healthyLogin',
-    'lr': hostname + '/lastHealthyRecord',
+    'login': hostname + '/healthyLogin',
+    'lastRecord': hostname + '/lastHealthyRecord',
     'firstRecord': hostname + '/addHealthyRecord',
     'secondRecord': hostname + '/addTwoHealthyRecord',
     'thirdRecord': hostname + '/addThreeHealthyRecord',
-    'gi': hostname + '/getInstructor',
-    'fp': hostname + '/familys/personal',
-    'tp': hostname + '/trips/personal',
-    'ti': hostname + '/teamImportantCity'
+    'getInstructor': hostname + '/getInstructor',
+    'getFamilys': hostname + '/familys/personal',
+    'getTrips': hostname + '/trips/personal',
+    'getImportantCity': hostname + '/teamImportantCity'
 }
 
 # healthyRecordId=9037871&temperature=36.3&temperatureNormal=0

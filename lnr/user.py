@@ -36,10 +36,12 @@ class litUesr:
         # login func
         try:
             response = requests.post(
-                url=endpoints['lg'], data=json.dumps(data), headers=headers)
-            res = response.json()['data']
+                url=endpoints['login'], data=json.dumps(data), headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
+
         return res
 
     def get_last_record(self):
@@ -56,10 +58,11 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['lr'], params=data, headers=headers)
-            res = response.json()['data']
+                url=endpoints['lastRecord'], params=data, headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
 
         return res
 
@@ -77,10 +80,12 @@ class litUesr:
         }
         try:
             response = requests.get(
-                url=endpoints['gi'], params=data, headers=headers)
-            res = response.json()['data']
+                url=endpoints['getInstructor'], params=data, headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
+
         return res
 
     def get_familys(self):
@@ -96,10 +101,12 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['fp'], params=data, headers=headers)
-            res = response.json()['data']
+                url=endpoints['getFamilys'], params=data, headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
+
         return res
 
     def get_important_city(self):
@@ -111,10 +118,11 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['ti'], headers=headers)
-            res = response.json()['data']
+                url=endpoints['getImportantCity'], headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
         return res
 
     def get_trips(self):
@@ -131,13 +139,15 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['tp'], params=data, headers=headers)
-            res = response.json()['data']
+                url=endpoints['getTrips'], params=data, headers=headers)
         except:
-            res = None
+            return None
+
+        res = response.json()
+
         return res
 
-    def first_record(self, mode='last', times=1, temperature=3.66, temperatureTwo=36.3, temperatureThree=36.3):
+    def first_record(self, mode='last', times=1, temperature=36.6, temperatureTwo=36.3, temperatureThree=36.3):
         """
         the 'normal' will not record the temperatureTwo and temperatureThree values from last record
         and you can use the 'manual' for use your values, 'random' use random values
@@ -227,10 +237,21 @@ class litUesr:
         try:
             response = requests.post(
                 url=endpoints['firstRecord'], data=json.dumps(data), headers=headers)
-            res = response.text
+            # res['data']['temperature'] = data['temperature']
+            # res['data']['temperatureTwo'] = data['temperatureTwo']
+            # res['data']['temperatureThree'] = data['temperatureThree']
             # {"success":true,"code":200,"msg":"请求成功","data":""}
         except:
-            res = None
+            return None
+
+        res = response.json()
+
+        res['data'] = {'temperature': data['temperature']}
+        if times >= 2:
+            res['data']['temperatureTwo'] = data['temperatureTwo']
+        if times == 3:
+            res['data']['temperatureThree'] = data['temperatureThree']
+
         return res
 
     def second_record(self, mode='last', temperature=36.6):
@@ -264,10 +285,12 @@ class litUesr:
         try:
             response = requests.put(
                 url=endpoints['secondRecord'], params=data, headers=headers)
-            res = response.text
-            # {"success":true,"code":200,"msg":"请求成功","data":""}
         except:
-            res = None
+            return None
+
+        res = response.json()
+        res['data'] = {'temperature': data['temperature']}
+
         return res
 
     def third_record(self, mode='last', temperature=36.6):
@@ -301,8 +324,10 @@ class litUesr:
         try:
             response = requests.put(
                 url=endpoints['thirdRecord'], params=data, headers=headers)
-            res = response.text
-            # {"success":true,"code":200,"msg":"请求成功","data":""}
         except:
-            res = None
+            return None
+
+        res = response.json()
+        res['data'] = {'temperature': data['temperature']}
+
         return res
