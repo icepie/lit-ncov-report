@@ -15,9 +15,9 @@ class litUesr:
         self.password = util.get_sha256(password)
 
         # login the acconut
-        self.info = self.__login()
+        self.info = self.__login()['data']
         try:
-            self.token = self.info['token']
+            self.token = self.info['data']['token']
             self.is_logined = True
         except:
             self.is_logined = False
