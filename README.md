@@ -4,7 +4,10 @@
 ![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/run.png) 
 
 ## eof
-本branch为最初的版本, 已迭代至1.9, 因个人的一些原因已停止其开发生命周期, 将会抽空重构此项目~
+本branch为最初的版本, 已迭代至1.9, ~~因个人的一些原因已停止其开发生命周期, 将会抽空重构此项目~~
+
+现已更加优雅地在[v2](https://github.com/icepie/lit-ncov-report/tree/v2)分支进行了重构
+
 并会使用golang设计一款go风格的同类软件[lit-health-go](https://github.com/icepie/lit-health-go)
 
 ## ~~fbi~~ warning!!
