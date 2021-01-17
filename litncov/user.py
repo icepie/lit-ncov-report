@@ -17,7 +17,7 @@ class litUesr:
         # login the acconut
         self.info = self.__login()['data']
         try:
-            self.token = self.info['data']['token']
+            self.token = self.info['token']
             self.is_logined = True
         except:
             self.is_logined = False
