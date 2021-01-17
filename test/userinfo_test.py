@@ -1,4 +1,4 @@
-from lnr.user import litUesr
+from litncov.user import litUesr
 
 testme = litUesr("B19070404", "xxxxxx")
 if testme.is_logined:

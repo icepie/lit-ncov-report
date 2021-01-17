@@ -3,8 +3,8 @@
 import requests
 import json
 
-from lnr import endpoints
-from lnr import util
+from litncov import endpoints
+from litncov import util
 
 
 class litUesr:
