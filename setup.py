@@ -3,7 +3,7 @@ from os import path as os_path
 from setuptools import setup
 
 setup(name='litncov',
-      version='0.0.6',
+      version='0.0.7',
       description='A ncov report library and tool for LIT(Luoyang Institute of Science and Technology)',
       url='http://github.com/icepie/lit-ncov-report',
       author='Tea',
@@ -14,7 +14,7 @@ setup(name='litncov',
       python_requires='>=3.6',
       entry_points={
           'console_scripts': [
-              'litncov = litncov:main',
+              'litncov = litncov.main:main',
           ],
       }
       )
