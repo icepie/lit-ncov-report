@@ -159,7 +159,7 @@ class litUesr:
         }
 
         # get the last record info
-        last_record = self.get_last_record()
+        last_record = self.get_last_record()['data']
 
         data = {
             'mobile': self.info['mobile'],
@@ -265,7 +265,7 @@ class litUesr:
         }
 
         # get the last record info
-        last_record = self.get_last_record()
+        last_record = self.get_last_record()['data']
 
         data = {
             'healthyRecordId': last_record['id'],
@@ -304,7 +304,7 @@ class litUesr:
         }
 
         # get the last record info
-        last_record = self.get_last_record()
+        last_record = self.get_last_record()['data']
 
         data = {
             'healthyRecordId': last_record['id'],
