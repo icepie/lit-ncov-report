@@ -27,9 +27,9 @@ class litUesr:
 
         try:
             self.__headers['token'] = self.info['token']
-            self.is_logined = True
+            self.is_logged = True
         except:
-            self.is_logined = False
+            self.is_logged = False
 
     def __login(self):
         data = {
@@ -63,7 +63,24 @@ class litUesr:
         res = response.json()
 
         return res
-
+    
+    def is_record_today(self, rtime = 1):
+        try:
+            # get the last record info
+            last_record = self.get_last_record()['data']
+        except:
+            return None
+        
+        if last_record['createTime'][0:10] == util.get_today_time():
+            if rtime == 1:
+                return True
+            elif (rtime == 2) & (last_record['createTime'] != ''):
+                return True
+            elif (rtime == 3) & (last_record['createTime'] != ''):
+                return True
+        else:
+            return False
+        
     def get_instructor(self):
         data = {
             'teamId': self.info['teamId'],
@@ -122,7 +139,7 @@ class litUesr:
 
         return res
 
-    def first_record(self, mode='last', times=1, temperature=36.1, temperatureTwo=36.2, temperatureThree=36.3):
+    def first_record(self, mode='last', rtimes=1, temperature=36.1, temperatureTwo=36.2, temperatureThree=36.3):
         """
         the 'normal' will not record the temperatureTwo and temperatureThree values from last record
         and you can use the 'manual' for use your values, 'random' use random values
@@ -181,25 +198,25 @@ class litUesr:
             'healthyStatus': last_record['healthyStatus'],
             'temperatureTwo': '',
             'temperatureThree': '',
-            'reportDate': util.get_time('today')
+            'reportDate': util.get_today_time()
         }
 
         if mode == 'last':
-            if times >= 2:
+            if rtimes >= 2:
                 data['temperatureTwo'] = last_record['temperatureTwo']
-            if times == 3:
+            if rtimes == 3:
                 data['temperatureThree'] = last_record['temperatureThree']
         elif mode == 'random':
             data['temperature'] = util.random_temp()
-            if times >= 2:
+            if rtimes >= 2:
                 data['temperatureTwo'] = util.random_temp()
-            if times == 3:
+            if rtimes == 3:
                 data['temperatureThree'] = util.random_temp()
         elif mode == 'manual':
             data['temperature'] = temperature
-            if times >= 2:
+            if rtimes >= 2:
                 data['temperatureTwo'] = temperatureTwo
-            if times == 3:
+            if rtimes == 3:
                 data['temperatureThree'] = temperatureThree
         else:
             return None
@@ -217,9 +234,9 @@ class litUesr:
         res = response.json()
 
         res['data'] = {'temperature': data['temperature']}
-        if times >= 2:
+        if rtimes >= 2:
             res['data']['temperatureTwo'] = data['temperatureTwo']
-        if times == 3:
+        if rtimes == 3:
             res['data']['temperatureThree'] = data['temperatureThree']
 
         return res

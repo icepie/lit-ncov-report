@@ -4,19 +4,26 @@ import datetime
 import gb2260
 import random
 
+
 def get_sha256(password: str):
     str = hashlib.sha256(password.encode('utf-8')).hexdigest()
     return str
 
-def get_time(type):
-    if type == 'now':
-        return str(datetime.datetime.now().replace(microsecond=0))
-    elif type == 'today':
-        return str(datetime.date.today())
-    else:
-        return None
+def get_today_time():
+    return str(datetime.date.today())
+
+# def get_now_timestamp():
+#     return int(time.time())
+
+
+# def datetime_timestamp(dt):
+#     time.strptime(dt, '%Y-%m-%d %H:%M:%S')
+#     ## time.struct_time(tm_year=2012, tm_mon=3, tm_mday=28, tm_hour=6, tm_min=53, tm_sec=40, tm_wday=2, tm_yday=88, tm_isdst=-1)
+#     ts = time.mktime(time.strptime(dt, '%Y-%m-%d %H:%M:%S'))
+#     return int(ts)
 
 def cl_build(current_district):
+    """ use gb2260 to build a CurrentLocation """
     div_result = []
     try:
         division = gb2260.get(current_district)
@@ -28,8 +35,8 @@ def cl_build(current_district):
     except:
         return None
 
-## not grace :(
 def current_location(currentDistrict, currentCity):
+    """ is not grace :( """
     cl = cl_build(currentDistrict)
     if cl == None:
         cl = cl_build(currentCity)
@@ -38,4 +45,5 @@ def current_location(currentDistrict, currentCity):
     return cl
 
 def random_temp():
-    return round(random.uniform(36.0,37.2), 2)
+    """ build a random temp """
+    return round(random.uniform(36.0, 37.2), 2)

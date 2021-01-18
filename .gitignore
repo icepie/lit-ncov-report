@@ -98,3 +98,6 @@ dmypy.json
 *.bat
 *.ps1
 *.sh
+
+# my test python file
+test.py
