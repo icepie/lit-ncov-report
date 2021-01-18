@@ -6,11 +6,13 @@ import random
 
 
 def get_sha256(password: str):
-    str = hashlib.sha256(password.encode('utf-8')).hexdigest()
+    str = hashlib.sha256(password.encode("utf-8")).hexdigest()
     return str
+
 
 def get_today_time():
     return str(datetime.date.today())
+
 
 # def get_now_timestamp():
 #     return int(time.time())
@@ -22,18 +24,20 @@ def get_today_time():
 #     ts = time.mktime(time.strptime(dt, '%Y-%m-%d %H:%M:%S'))
 #     return int(ts)
 
+
 def cl_build(current_district):
     """ use gb2260 to build a CurrentLocation """
     div_result = []
     try:
         division = gb2260.get(current_district)
         for current in division.stack():
-            temp = str(u'{0}'.format(current.name))
+            temp = str(u"{0}".format(current.name))
             div_result.append(temp)
             # use "-" to split str
-        return("-".join(str(i) for i in div_result))
+        return "-".join(str(i) for i in div_result)
     except:
         return None
+
 
 def current_location(currentDistrict, currentCity):
     """ is not grace :( """
@@ -43,6 +47,7 @@ def current_location(currentDistrict, currentCity):
     if cl == None:
         return None
     return cl
+
 
 def random_temp():
     """ build a random temp """
