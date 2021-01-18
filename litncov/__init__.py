@@ -14,5 +14,3 @@ endpoints = {
     "getImportantCity": hostname + "/teamImportantCity",
     "queryRecord": hostname + "/healthyRecordByUser",
 }
-
-# healthyRecordId=9037871&temperature=36.3&temperatureNormal=0

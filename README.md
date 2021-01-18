@@ -61,9 +61,18 @@ if testme.is_logged:
 ```
 
 ## CLI工具
-### 查看帮助
+
+### 常规上报
 ```bash
+# 默认使用上次上报数据进行上报(包含三次)
+litncov -u USERNAME -p USERNAME report
+```
+
+### 更多
+```bash
+# 查看帮助信息
 litncov --help
 ```
 
-### 拓展实现
+## 拓展实现
+### todo
