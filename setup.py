@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(name='litncov',
-      version='0.1.5',
+      version='0.1.6',
       description='A ncov report library and tool for LIT(Luoyang Institute of Science and Technology)',
       long_description=long_description,
       long_description_content_type="text/markdown",
