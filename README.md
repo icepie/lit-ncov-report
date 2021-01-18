@@ -1,6 +1,6 @@
 # lit-ncov-report
 洛阳理工学院 "健康状况管控平台" 的一个非官方`Python 封装库`兼`CLI工具`与`拓展实现`
-> 如需旧版请前往[v1]()
+> 如需旧版请前往[v1](https://github.com/icepie/lit-ncov-report/tree/v1)
 
 ## 安装
 ```bash
