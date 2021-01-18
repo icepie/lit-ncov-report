@@ -11,7 +11,8 @@ endpoints = {
     'getInstructor': hostname + '/getInstructor',
     'getFamilys': hostname + '/familys/personal',
     'getTrips': hostname + '/trips/personal',
-    'getImportantCity': hostname + '/teamImportantCity'
+    'getImportantCity': hostname + '/teamImportantCity',
+    'queryRecord': hostname + '/healthyRecordByUser'
 }
 
 # healthyRecordId=9037871&temperature=36.3&temperatureNormal=0

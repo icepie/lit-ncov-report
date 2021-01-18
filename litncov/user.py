@@ -139,6 +139,27 @@ class litUesr:
 
         return res
 
+    def query_record(self, st=util.get_today_time, et=util.get_today_time):
+        data = {
+            'pageNum': 1,
+            'pageSize': 20,
+            'userId': self.info['userId'],
+            'teamId': self.info['teamId'],
+            'startTime': st,
+            'endTime': et
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints['queryRecord'], params=data, headers=self.__headers)
+        except:
+            return None
+        
+        res = response.json()
+
+        return res
+
+
     def first_record(self, mode='last', rtimes=1, temperature=36.1, temperatureTwo=36.2, temperatureThree=36.3):
         """
         the 'normal' will not record the temperatureTwo and temperatureThree values from last record

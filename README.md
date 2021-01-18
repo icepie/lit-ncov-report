@@ -25,6 +25,10 @@ if testme.is_logged:
     print(testme.info)
     # 打印上次上报信息
     print(testme.get_last_record())
+    # 查询 2021-01-04 至今的上报信息
+    print(testme.query_record('2021-01-04'))
+    # 查询 2021-01-04 至 2021-01-18 的上报信息
+    print(testme.query_record('2021-01-04', '2021-01-18'))
     # 打印学生学籍信息
     print(testme.get_instructor())
     # 打印用户家庭信息
