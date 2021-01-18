@@ -122,7 +122,7 @@ class litUesr:
 
         return res
 
-    def first_record(self, mode='last', times=1, temperature=36.6, temperatureTwo=36.3, temperatureThree=36.3):
+    def first_record(self, mode='last', times=1, temperature=36.1, temperatureTwo=36.2, temperatureThree=36.3):
         """
         the 'normal' will not record the temperatureTwo and temperatureThree values from last record
         and you can use the 'manual' for use your values, 'random' use random values
