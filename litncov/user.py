@@ -14,20 +14,24 @@ class litUesr:
         self.username = username
         self.password = util.get_sha256(password)
 
-        # login the acconut
-        self.info = self.__login()['data']
+        self.__headers = {
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json'
+        }
+
         try:
-            self.token = self.info['token']
+            # login the acconut
+            self.info = self.__login()['data']
+        except:
+            self.info = None
+
+        try:
+            self.__headers['token'] = self.info['token']
             self.is_logined = True
         except:
             self.is_logined = False
 
     def __login(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json'
-        }
-
         data = {
             'cardNo': self.username,
             'password': self.password
@@ -36,7 +40,7 @@ class litUesr:
         # login func
         try:
             response = requests.post(
-                url=endpoints['login'], data=json.dumps(data), headers=headers)
+                url=endpoints['login'], data=json.dumps(data), headers=self.__headers)
         except:
             return None
 
@@ -45,12 +49,6 @@ class litUesr:
         return res
 
     def get_last_record(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json',
-            'token': self.token
-        }
-
         data = {
             'teamId': self.info['teamId'],
             'userId': self.info['userId']
@@ -58,7 +56,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['lastRecord'], params=data, headers=headers)
+                url=endpoints['lastRecord'], params=data, headers=self.__headers)
         except:
             return None
 
@@ -67,20 +65,15 @@ class litUesr:
         return res
 
     def get_instructor(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
-
         data = {
             'teamId': self.info['teamId'],
             'organizationName': self.info['organizationName'],
             'userOrganizationId': self.info['userOrganizationId']
         }
+
         try:
             response = requests.get(
-                url=endpoints['getInstructor'], params=data, headers=headers)
+                url=endpoints['getInstructor'], params=data, headers=self.__headers)
         except:
             return None
 
@@ -89,19 +82,13 @@ class litUesr:
         return res
 
     def get_familys(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
-
         data = {
             'userId': self.info['userId'],
         }
 
         try:
             response = requests.get(
-                url=endpoints['getFamilys'], params=data, headers=headers)
+                url=endpoints['getFamilys'], params=data, headers=self.__headers)
         except:
             return None
 
@@ -110,15 +97,9 @@ class litUesr:
         return res
 
     def get_important_city(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
-
         try:
             response = requests.get(
-                url=endpoints['getImportantCity'], headers=headers)
+                url=endpoints['getImportantCity'], headers=self.__headers)
         except:
             return None
 
@@ -126,12 +107,6 @@ class litUesr:
         return res
 
     def get_trips(self):
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
-
         data = {
             'userId': self.info['userId'],
             'teamId': self.info['teamId'],
@@ -139,7 +114,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints['getTrips'], params=data, headers=headers)
+                url=endpoints['getTrips'], params=data, headers=self.__headers)
         except:
             return None
 
@@ -152,11 +127,6 @@ class litUesr:
         the 'normal' will not record the temperatureTwo and temperatureThree values from last record
         and you can use the 'manual' for use your values, 'random' use random values
         """
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
 
         # get the last record info
         last_record = self.get_last_record()['data']
@@ -236,7 +206,7 @@ class litUesr:
 
         try:
             response = requests.post(
-                url=endpoints['firstRecord'], data=json.dumps(data), headers=headers)
+                url=endpoints['firstRecord'], data=json.dumps(data), headers=self.__headers)
             # res['data']['temperature'] = data['temperature']
             # res['data']['temperatureTwo'] = data['temperatureTwo']
             # res['data']['temperatureThree'] = data['temperatureThree']
@@ -258,11 +228,6 @@ class litUesr:
         """
         mode: 'last', 'random' and 'manual'
         """
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
 
         # get the last record info
         last_record = self.get_last_record()['data']
@@ -284,7 +249,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints['secondRecord'], params=data, headers=headers)
+                url=endpoints['secondRecord'], params=data, headers=self.__headers)
         except:
             return None
 
@@ -297,11 +262,6 @@ class litUesr:
         """
         mode: 'last', 'random' and 'manual'
         """
-        headers = {
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json;charset=UTF-8',
-            'token': self.token,
-        }
 
         # get the last record info
         last_record = self.get_last_record()['data']
@@ -323,7 +283,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints['thirdRecord'], params=data, headers=headers)
+                url=endpoints['thirdRecord'], params=data, headers=self.__headers)
         except:
             return None
 

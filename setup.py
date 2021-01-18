@@ -3,7 +3,7 @@ from os import path as os_path
 from setuptools import setup
 
 setup(name='litncov',
-      version='0.1.0',
+      version='0.1.1',
       description='A ncov report library and tool for LIT(Luoyang Institute of Science and Technology)',
       url='http://github.com/icepie/lit-ncov-report',
       author='Tea',
