@@ -72,7 +72,7 @@ $ litncov -u USERNAME -p PASSWORD report -a
 
 - 使用随机温度进行今天第二次上报
 ```bash
-$ litncov -u USERNAME -p PASSWORD report -r 2 -mode random
+$ litncov -u USERNAME -p PASSWORD report -r 2 -m random
 ```
 
 - 手动输入温度进行今天第三次上报
@@ -83,7 +83,7 @@ $ litncov -u USERNAME -p PASSWORD report -r 3 -t 36.7
 #### 帮助
 ``` zsh
 # 默认使用上次上报数据进行上报(包含三次)
-$ litncov -u USERNAME -p USERNAME report
+$ litncov report -h
 usage: litncov report [-h] [-a] [-f] [-r RTIME] [-m MODE] [-t TEMP]
 
 optional arguments:
@@ -97,11 +97,61 @@ optional arguments:
 ```
 ### 查询用户信息
 
-- todo
+#### 例子
+
+- 主要个人信息
+```
+$ litncov -u USERNAME -p USERNAME info --user
+```
+
+- 外出信息
+$ litncov -u USERNAME -p USERNAME info --trip
+
+- 上次上报记录
+$ litncov -u USERNAME -p USERNAME info -l
+
+#### 帮助
+
+```bash
+$ litncov info -h
+usage: litncov info [-h] [-u] [-l] [-f] [-i] [-t]
+
+optional arguments:
+  -h, --help         show this help message and exit
+  -u, --user         the user main info
+  -l, --last_record  the user last record info
+  -f, --family       the user family info
+  -i, --instructor   the user instructor info
+  -t, --tirp         the user tirp info
+
+```
 
 ### 查询上报记录
 
-- todo
+#### 例子
+- 查询某日至今
+
+```bash
+$ litncov -u USERNAME -p PASSWORD query -s 2020-01-01
+```
+
+- 查询某日至某日
+
+```bash
+$ litncov -u USERNAME -p PASSWORD query -s 2020-01-01 -e 2020-01-15
+```
+
+#### 帮助
+```bash
+usage: litncov query [-h] -s START_TIME [-e END_TIME]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -s START_TIME, --start_time START_TIME
+                        the start time of the report history (Year-Month-Day)
+  -e END_TIME, --end_time END_TIME
+                        the end time of the report history, default Today (Year-Month-Day)
+```
 
 ## 拓展实现
 - todo

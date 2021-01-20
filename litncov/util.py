@@ -1,5 +1,6 @@
 # sha256 for password
 import hashlib
+import time
 import datetime
 import gb2260
 import random
@@ -12,6 +13,17 @@ def get_sha256(password: str):
 
 def get_today_time():
     return str(datetime.date.today())
+
+
+def is_valid_date(strdate):
+    try:
+        if ":" in strdate:
+            time.strptime(strdate, "%Y-%m-%d %H:%M:%S")
+        else:
+            time.strptime(strdate, "%Y-%m-%d")
+        return True
+    except:
+        return False
 
 
 # def get_now_timestamp():

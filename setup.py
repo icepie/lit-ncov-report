@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="litncov",
-    version="0.2.0",
+    version="2.0.1",
     description="A ncov report library and tool for LIT(Luoyang Institute of Science and Technology)",
     long_description=long_description,
     long_description_content_type="text/markdown",
