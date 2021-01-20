@@ -1,6 +1,6 @@
 from litncov.user import litUesr
 
-testme = litUesr("username", "password")
+testme = litUesr("B19071121", "L12345678")
 if testme.is_logged:
     print(testme.info)
     print(testme.get_last_record())

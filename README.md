@@ -61,18 +61,47 @@ if testme.is_logged:
 ```
 
 ## CLI工具
+### 上报功能
+#### 例子
 
-### 常规上报
+- 使用上一条上报记录进行今天三次上报
 ```bash
+$ litncov -u USERNAME -p PASSWORD report -a
+# 不带 -a 参数则只进行今天第一次上报
+```
+
+- 使用随机温度进行今天第二次上报
+```bash
+$ litncov -u USERNAME -p PASSWORD report -r 2 -mode random
+```
+
+- 手动输入温度进行今天第三次上报
+```bash
+$ litncov -u USERNAME -p PASSWORD report -r 3 -t 36.7
+```
+
+#### 帮助
+``` zsh
 # 默认使用上次上报数据进行上报(包含三次)
-litncov -u USERNAME -p USERNAME report
-```
+$ litncov -u USERNAME -p USERNAME report
+usage: litncov report [-h] [-a] [-f] [-r RTIME] [-m MODE] [-t TEMP]
 
-### 更多
-```bash
-# 查看帮助信息
-litncov --help
+optional arguments:
+  -h, --help            show this help message and exit
+  -a, --all             do the all report tasks today
+  -f, --force           forcely report
+  -r RTIME, --rtime RTIME
+                        the report time {1,2,3}
+  -m MODE, --mode MODE  the report mode {last,random,manual}, default last
+  -t TEMP, --temp TEMP  the body temperature (float), only use in manual
 ```
+### 查询用户信息
+
+- todo
+
+### 查询上报记录
+
+- todo
 
 ## 拓展实现
-### todo
+- todo

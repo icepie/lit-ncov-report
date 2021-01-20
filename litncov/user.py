@@ -273,11 +273,11 @@ class litUesr:
 
         res = response.json()
 
-        res["data"] = {"temperature": data["temperature"]}
+        res["data"] = {"temperature": float(data["temperature"])}
         if rtimes >= 2:
-            res["data"]["temperatureTwo"] = data["temperatureTwo"]
+            res["data"]["temperatureTwo"] = float(data["temperatureTwo"])
         if rtimes == 3:
-            res["data"]["temperatureThree"] = data["temperatureThree"]
+            res["data"]["temperatureThree"] = float(data["temperatureThree"])
 
         return res
 
@@ -312,7 +312,7 @@ class litUesr:
             return None
 
         res = response.json()
-        res["data"] = {"temperature": data["temperature"]}
+        res["data"] = {"temperature": float(data["temperature"])}
 
         return res
 
@@ -347,6 +347,6 @@ class litUesr:
             return None
 
         res = response.json()
-        res["data"] = {"temperature": data["temperature"]}
+        res["data"] = {"temperature": float(data["temperature"])}
 
         return res
