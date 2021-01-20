@@ -77,9 +77,9 @@ class litUesr:
         if last_record["createTime"][0:10] == util.get_today_time():
             if rtime == 1:
                 return True
-            elif (rtime == 2) & (last_record["createTime"] != ""):
+            elif (rtime == 2) & (last_record["temperatureTwo"] != ""):
                 return True
-            elif (rtime == 3) & (last_record["createTime"] != ""):
+            elif (rtime == 3) & (last_record["temperatureThree"] != ""):
                 return True
         else:
             return False
@@ -273,11 +273,11 @@ class litUesr:
 
         res = response.json()
 
-        res["data"] = {"temperature": float(data["temperature"])}
+        res["data"] = {"temperature": data["temperature"]}
         if rtimes >= 2:
-            res["data"]["temperatureTwo"] = float(data["temperatureTwo"])
+            res["data"]["temperatureTwo"] = data["temperatureTwo"]
         if rtimes == 3:
-            res["data"]["temperatureThree"] = float(data["temperatureThree"])
+            res["data"]["temperatureThree"] = data["temperatureThree"]
 
         return res
 
@@ -312,7 +312,7 @@ class litUesr:
             return None
 
         res = response.json()
-        res["data"] = {"temperature": float(data["temperature"])}
+        res["data"] = {"temperature": data["temperature"]}
 
         return res
 
@@ -347,6 +347,6 @@ class litUesr:
             return None
 
         res = response.json()
-        res["data"] = {"temperature": float(data["temperature"])}
+        res["data"] = {"temperature": data["temperature"]}
 
         return res
