@@ -81,8 +81,7 @@ $ litncov -u USERNAME -p PASSWORD report -r 3 -t 36.7
 ```
 
 #### 帮助
-```bash
-# 默认使用上次上报数据进行上报(包含三次)
+```
 $ litncov report -h
 usage: litncov report [-h] [-a] [-f] [-r RTIME] [-m MODE] [-t TEMP]
 
@@ -118,7 +117,7 @@ $ litncov -u USERNAME -p USERNAME info -l
 
 #### 帮助
 
-```bash
+```
 $ litncov info -h
 usage: litncov info [-h] [-u] [-l] [-f] [-i] [-t]
 
@@ -148,7 +147,7 @@ $ litncov -u USERNAME -p PASSWORD query -s 2020-01-01 -e 2020-01-15
 ```
 
 #### 帮助
-```bash
+```
 usage: litncov query [-h] -s START_TIME [-e END_TIME]
 
 optional arguments:
