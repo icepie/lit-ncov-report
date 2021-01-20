@@ -81,7 +81,7 @@ $ litncov -u USERNAME -p PASSWORD report -r 3 -t 36.7
 ```
 
 #### 帮助
-``` zsh
+```bash
 # 默认使用上次上报数据进行上报(包含三次)
 $ litncov report -h
 usage: litncov report [-h] [-a] [-f] [-r RTIME] [-m MODE] [-t TEMP]
@@ -100,15 +100,21 @@ optional arguments:
 #### 例子
 
 - 主要个人信息
-```
+```bash
 $ litncov -u USERNAME -p USERNAME info --user
 ```
 
 - 外出信息
+
+```bash
 $ litncov -u USERNAME -p USERNAME info --trip
+```
 
 - 上次上报记录
+
+```bash
 $ litncov -u USERNAME -p USERNAME info -l
+```
 
 #### 帮助
 
