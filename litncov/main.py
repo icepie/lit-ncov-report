@@ -27,18 +27,37 @@ def main():
         parser.print_help()
         exit()
 
-    # check rtime arg
-    if args.rtime and args.rtime not in {1, 2, 3}:
-        parser.print_help()
-        exit()
-    
     # check mode arg
-    if args.rtime and args.rtime not in {'last','random','manual'}:
+    if args.mode and args.mode not in {'last','random','manual'}:
         parser.print_help()
         exit()
 
-    # check temp arg
-    if args.temp and (float(args.temp) >= 37.3 or float(args.temp) < 35.0)   :
+    # check arg all with rtime
+    if args.all and args.rtime:
+        console.log("[bold red]Error: [u]-a[/u] parameter can run with [u]-r[/u] parameter[/bold red]")
+        parser.print_help()
+        exit()
+
+    # check rtime arg
+    if args.rtime and int(args.rtime) not in {1, 2, 3}:
+        parser.print_help()
+        exit()
+    elif not args.rtime and not args.all:
+        args.rtime = 1
+
+    # check arg temp with mode
+    if args.temp and not args.mode:
+        args.mode='manual'
+
+    if not args.mode:
+        args.mode='last'
+
+    if ((args.mode != 'manual') and  args.temp):
+        console.log("[bold red]Error: only manual mode can run with [u]-t[/u] parameter[/bold red]")
+        parser.print_help()
+        exit()
+
+    if args.temp and (float(args.temp) >= 37.3 or float(args.temp) < 35.0):
         console.log("[bold red]Dangerous body temperature[/bold red]")
         console.log("[bold red]If this is your body temperature is too high or low, plz use the [u]-f[/u] parameter to report[/bold red]")
         exit()
@@ -48,10 +67,35 @@ def main():
         if testme.is_logged:
             console.log("[bold cyan]Login successful[/bold cyan]")
             # start report
-            if not testme.is_record_today(1) or args.force:
-                console.log(testme.first_record(mode='last', rtimes=3))
-            else:
-                console.log("You have finished reporting today")
+            # all arg
+            if args.all:
+                if not testme.is_record_today(3) or args.force:
+                    if args.mode == 'manual':
+                        console.log(testme.first_record(mode=args.mode, rtimes=3, temperature=args.temp, temperatureTwo=args.temp, temperatureThree=args.temp))
+                    else:
+                        console.log(testme.first_record(mode=args.mode, rtimes=3))
+                elif args.all:
+                    console.log("You have finished all report tasks today")
+
+            # rtime arg
+            if args.rtime:
+                if int(args.rtime) == 1 and (not testme.is_record_today(1) or args.force):
+                    if args.mode == 'manual':
+                        console.log(testme.first_record(mode=args.mode, temperature=args.temp))
+                    else:
+                        console.log(testme.first_record(mode=args.mode))
+                elif int(args.rtime) == 2 and (not testme.is_record_today(2) or args.force):
+                    if args.mode == 'manual':
+                        console.log(testme.second_record(mode=args.mode, temperature=args.temp))
+                    else:
+                        console.log(testme.second_record(mode=args.mode))
+                elif int(args.rtime) == 3 and (not testme.is_record_today(3) or args.force):
+                    if args.mode == 'manual':
+                        console.log(testme.third_record(mode=args.mode, temperature=args.temp))
+                    else:
+                        console.log(testme.second_record(mode=args.mode))
+                elif args.rtime:
+                    console.log("You have finished the report task %s today" % args.rtime)
         else:
                 console.log("[bold red]Fail to login[/bold red]")
                 console.log(testme.login)
