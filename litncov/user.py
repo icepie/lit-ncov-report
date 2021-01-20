@@ -19,12 +19,19 @@ class litUesr:
             "Content-Type": "application/json",
         }
 
+        # login the acconut
         try:
-            # login the acconut
-            self.info = self.__login()["data"]
+            self.login = self.__login()
         except:
             self.info = None
 
+        # get the user info
+        try:
+            self.info = self.login["data"]
+        except:
+            self.info = None
+
+        # update some values
         try:
             self.__headers["token"] = self.info["token"]
             self.is_logged = True
