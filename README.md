@@ -3,15 +3,26 @@
 
 [![pypi version](https://img.shields.io/pypi/v/litncov)](https://pypi.org/project/litncov/)
 [![pypi downloads per month](https://img.shields.io/pypi/dm/litncov)](https://pypi.org/project/litncov/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/icepie/litncov.svg)](https://hub.docker.com/r/icepie/litncov/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 
 > 如需旧版请前往[v1](https://github.com/icepie/lit-ncov-report/tree/v1)
 
 ## 安装
+
+### Python
+
 ```bash
 # Python3.6+ with pip
-pip install -U litncov
+pip install litncov --upgrade
+```
+
+### Docker
+
+```bash
+docker run -it --rm icepie/litncov
 ```
 
 ## 封装库
@@ -61,26 +72,32 @@ if testme.is_logged:
 ```
 
 ## CLI工具
+
 ### 上报功能
+
 #### 例子
 
 - 使用上一条上报记录进行今天三次上报
+
 ```bash
 $ litncov -u USERNAME -p PASSWORD report -a
 # 不带 -a 参数则只进行今天第一次上报
 ```
 
 - 使用随机温度进行今天第二次上报
+
 ```bash
 $ litncov -u USERNAME -p PASSWORD report -r 2 -m random
 ```
 
 - 手动输入温度进行今天第三次上报
+
 ```bash
 $ litncov -u USERNAME -p PASSWORD report -r 3 -t 36.7
 ```
 
 #### 帮助
+
 ```
 $ litncov report -h
 usage: litncov report [-h] [-a] [-f] [-r RTIME] [-m MODE] [-t TEMP]
@@ -94,11 +111,13 @@ optional arguments:
   -m MODE, --mode MODE  the report mode {last,random,manual}, default last
   -t TEMP, --temp TEMP  the body temperature (float), only use in manual
 ```
+
 ### 查询用户信息
 
 #### 例子
 
 - 主要个人信息
+
 ```bash
 $ litncov -u USERNAME -p USERNAME info --user
 ```
@@ -147,6 +166,7 @@ $ litncov -u USERNAME -p PASSWORD query -s 2020-01-01 -e 2020-01-15
 ```
 
 #### 帮助
+
 ```
 usage: litncov query [-h] -s START_TIME [-e END_TIME]
 
