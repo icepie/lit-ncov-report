@@ -89,9 +89,9 @@ $icepie:python3 main.py -m -b
 ### remind sever
 #### wechat提醒
 
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc1.png) 
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc2.png)
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/sc3.png)
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/v1/docs/sc1.png) 
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/v1/docs/sc2.png)
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/v1/docs/sc3.png)
 
 1. 进入 http://sc.ftqq.com/3.version ,按照教程获取你的 `sckey`
 2. 打开 `config/push.json`
@@ -111,7 +111,7 @@ main.py -m -s
 
 #### tgbot提醒
 
-![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/master/docs/tg.png)
+![test](https://raw.githubusercontent.com/icepie/lit-ncov-report/v1/docs/tg.png)
 
 1. 进入 https://core.telegram.org/bots/api ,按照教程获取你的 `tgtoken` 和 `tgid`
 2. 打开 `config/push.json`
