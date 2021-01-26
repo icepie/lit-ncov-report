@@ -25,7 +25,10 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第一次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                "健康状况管控平台: 第一次上报" + status,
+                "温度: " + str(data["data"]["temperature"]),
+            )
         # 判断今天是否第二次上报过
         elif not litu.is_record_today(2):
             # 进行当日第二次体温上报
@@ -35,7 +38,10 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第二次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                "健康状况管控平台: 第二次上报" + status,
+                "温度: " + str(data["data"]["temperature"]),
+            )
         # 判断今天是否第三次上报过
         elif not litu.is_record_today(rtime=3):
             # 进行当日第三次体温上报
@@ -45,8 +51,19 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第三次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                "健康状况管控平台: 第三次上报" + status,
+                "温度: " + str(data["data"]["temperature"]),
+            )
         else:
-            svc.send("健康状况管控平台: 已完成今日上报任务", "温度一: " + str(last_record["data"]["temperature"]) +  " 温度二: " + str(last_record["data"]["temperatureTwo"]) + " 温度三: " +  str(last_record["data"]["temperatureThree"]))
+            svc.send(
+                "健康状况管控平台: 已完成今日上报任务",
+                "温度一: "
+                + str(last_record["data"]["temperature"])
+                + " 温度二: "
+                + str(last_record["data"]["temperatureTwo"])
+                + " 温度三: "
+                + str(last_record["data"]["temperatureThree"]),
+            )
     else:
-        svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆" )
+        svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆")

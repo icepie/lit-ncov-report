@@ -1,4 +1,3 @@
-
 import requests
 import base64
 import os
@@ -14,7 +13,7 @@ def check_is_web(string):
 
 class ServerChan(object):
     def __init__(self, sckey=""):
-        self.url = 'https://sc.ftqq.com/{}.send'.format(sckey)
+        self.url = "https://sc.ftqq.com/{}.send".format(sckey)
 
     def send(self, title, content=""):
         requests.get(self.url, params={"text": title, "desp": content})
