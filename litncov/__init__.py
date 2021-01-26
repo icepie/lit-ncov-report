@@ -13,4 +13,5 @@ endpoints = {
     "getTrips": hostname + "/trips/personal",
     "getImportantCity": hostname + "/teamImportantCity",
     "queryRecord": hostname + "/healthyRecordByUser",
+    "password": hostname + "/password",
 }

@@ -350,3 +350,20 @@ class litUesr:
         res["data"] = {"temperature": data["temperature"]}
 
         return res
+
+    def change_password(self, psw: str):
+        """
+        for changes your password
+        """
+        data = {"password": util.get_sha256(psw)}
+
+        try:
+            response = requests.put(
+                url=endpoints["password"], params=data, headers=self.__headers
+            )
+        except:
+            return None
+
+        res = response.json()
+
+        return res
