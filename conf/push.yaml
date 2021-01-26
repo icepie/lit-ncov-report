@@ -1,5 +1,3 @@
-
-
 tgbot:
   #proxy support http, https and sock
   proxy_type: 'sock' 
