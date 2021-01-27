@@ -2,10 +2,13 @@
 #  导入模块
 from litncov.user import litUesr
 from server.serverchan import ServerChan
-
+from server.cqhttp import CQHTTP
+import datetime as dt
 
 # 推送功能设置
 svc = ServerChan("SCKEY")
+qq = CQHTTP("http://0.0.0.0:5788")
+qqgroup = 11111111
 
 # 新建实例
 litu = litUesr("username", "password")
@@ -26,6 +29,7 @@ def main_handler(event, context):
             else:
                 status = "失败"
             svc.send(("健康状况管控平台: 第一次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            qq.send_group_msg(qqgroup, "健康状况管控平台: 第一次上报成功")
         # 判断今天是否第二次上报过
         elif not litu.is_record_today(2):
             # 进行当日第二次体温上报
@@ -36,6 +40,7 @@ def main_handler(event, context):
             else:
                 status = "失败"
             svc.send(("健康状况管控平台: 第二次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            qq.send_group_msg(qqgroup, "健康状况管控平台: 第二次上报成功")
         # 判断今天是否第三次上报过
         elif not litu.is_record_today(rtime=3):
             # 进行当日第三次体温上报
@@ -46,7 +51,13 @@ def main_handler(event, context):
             else:
                 status = "失败"
             svc.send(("健康状况管控平台: 第三次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            qq.send_group_msg(qqgroup, "健康状况管控平台: 第三次上报成功")
         else:
-            svc.send("健康状况管控平台: 已完成今日上报任务", "温度一: " + str(last_record["data"]["temperature"]) +  " 温度二: " + str(last_record["data"]["temperatureTwo"]) + " 温度三: " +  str(last_record["data"]["temperatureThree"]))
+            svc.send("健康状况管控平台: 已完成今日上报任务", "温度一: " + str(last_record["data"]["temperature"]) +  "\n\n温度二: " + str(last_record["data"]["temperatureTwo"]) + "\n\n温度三: " +  str(last_record["data"]["temperatureThree"]) + "\n\n时间: " + 
+str(dt.datetime.now().strftime('%F %T')))
+            qq.send_group_msg(qqgroup, "健康状况管控平台: 已完成今日上报任务")
     else:
         svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆" )
+
+
+main_handler("","")
