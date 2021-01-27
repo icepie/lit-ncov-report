@@ -1,5 +1,6 @@
 import requests
 
+
 class CQHTTP(object):
     def __init__(self, url=""):
         self.url = url
@@ -12,9 +13,7 @@ class CQHTTP(object):
         }
 
         try:
-            response = requests.post(
-                url=self.url + "/send_group_msg", data=data
-            )
+            response = requests.post(url=self.url + "/send_group_msg", data=data)
             print(response.text)
         except:
             return None

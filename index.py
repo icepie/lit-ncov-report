@@ -28,7 +28,10 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第一次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                ("健康状况管控平台: 第一次上报" + status),
+                ("温度: " + str(data["data"]["temperature"])),
+            )
             qq.send_group_msg(qqgroup, "健康状况管控平台: 第一次上报成功")
         # 判断今天是否第二次上报过
         elif not litu.is_record_today(2):
@@ -39,7 +42,10 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第二次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                ("健康状况管控平台: 第二次上报" + status),
+                ("温度: " + str(data["data"]["temperature"])),
+            )
             qq.send_group_msg(qqgroup, "健康状况管控平台: 第二次上报成功")
         # 判断今天是否第三次上报过
         elif not litu.is_record_today(rtime=3):
@@ -50,14 +56,23 @@ def main_handler(event, context):
                 status = "成功"
             else:
                 status = "失败"
-            svc.send(("健康状况管控平台: 第三次上报" + status), ("温度: " + str(data["data"]["temperature"]) ))
+            svc.send(
+                ("健康状况管控平台: 第三次上报" + status),
+                ("温度: " + str(data["data"]["temperature"])),
+            )
             qq.send_group_msg(qqgroup, "健康状况管控平台: 第三次上报成功")
         else:
-            svc.send("健康状况管控平台: 已完成今日上报任务", "温度一: " + str(last_record["data"]["temperature"]) +  "\n\n温度二: " + str(last_record["data"]["temperatureTwo"]) + "\n\n温度三: " +  str(last_record["data"]["temperatureThree"]) + "\n\n时间: " + 
-str(dt.datetime.now().strftime('%F %T')))
+            svc.send(
+                "健康状况管控平台: 已完成今日上报任务",
+                "温度一: "
+                + str(last_record["data"]["temperature"])
+                + "\n\n温度二: "
+                + str(last_record["data"]["temperatureTwo"])
+                + "\n\n温度三: "
+                + str(last_record["data"]["temperatureThree"])
+                + "\n\n时间: "
+                + str(dt.datetime.now().strftime("%F %T")),
+            )
             qq.send_group_msg(qqgroup, "健康状况管控平台: 已完成今日上报任务")
     else:
-        svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆" )
-
-
-main_handler("","")
+        svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆")
