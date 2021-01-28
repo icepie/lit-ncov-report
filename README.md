@@ -10,6 +10,8 @@
 
 > 如需旧版请前往[v1](https://github.com/icepie/lit-ncov-report/tree/v1)
 
+> Serverless(如云函数)请前往 [scf](https://github.com/icepie/lit-ncov-report/tree/scf)
+
 ## 安装
 
 ### Python
