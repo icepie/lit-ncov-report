@@ -8,7 +8,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 
-> 如需旧版请前往[v1](https://github.com/icepie/lit-ncov-report/tree/v1)
+> 如需旧版请前往 [v1](https://github.com/icepie/lit-ncov-report/tree/v1)
 
 > Serverless(如云函数)请前往 [scf](https://github.com/icepie/lit-ncov-report/tree/scf)
 
