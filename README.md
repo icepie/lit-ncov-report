@@ -179,6 +179,3 @@ optional arguments:
   -e END_TIME, --end_time END_TIME
                         the end time of the report history, default Today (Year-Month-Day)
 ```
-
-## 拓展实现
-- todo

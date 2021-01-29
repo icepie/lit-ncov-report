@@ -17,10 +17,7 @@ def get_today_time():
 
 def is_valid_date(strdate):
     try:
-        if ":" in strdate:
-            time.strptime(strdate, "%Y-%m-%d %H:%M:%S")
-        else:
-            time.strptime(strdate, "%Y-%m-%d")
+        time.strptime(strdate, "%Y-%m-%d")
         return True
     except:
         return False
