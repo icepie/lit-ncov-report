@@ -21,3 +21,19 @@ class CQHTTP(object):
         res = response.json()
 
         return res
+
+    def send_private_msg(self, user_id: int, message: str, auto_escape: bool = True):
+        data = {
+            "user_id": user_id,
+            "message": message,
+            "auto_escape": auto_escape,
+        }
+
+        try:
+            response = requests.post(url=self.url + "/send_private_msg", data=data)
+        except:
+            return None
+
+        res = response.json()
+
+        return res
