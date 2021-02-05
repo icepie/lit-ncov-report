@@ -1,78 +1,161 @@
 # -*- coding: utf8 -*-
 #  导入模块
+import os
+import json
+import csv
+import datetime as dt
 from litncov.user import litUesr
 from server.serverchan import ServerChan
 from server.cqhttp import CQHTTP
-import datetime as dt
 
-# 推送功能设置
-svc = ServerChan("SCKEY")
-qq = CQHTTP("http://0.0.0.0:5788")
-qqgroup = 11111111
+# 读取主要设置
+def conf_reader():
+    current_path = os.path.abspath(__file__)
+    config_file_path=os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),'conf.json')
+    with open(config_file_path, 'r') as f:
+        data = json.load(f)
+    return data
 
-# 新建实例
-litu = litUesr("username", "password")
+# 读取用户配置
+def users_reader():
+    current_path = os.path.abspath(__file__)
+    users_file_path=os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),'users.csv')
+    with open(users_file_path, 'r') as f:
+        f_csv = csv.reader(f)
+        next(f_csv) 
+        data = [row for row in f_csv]
+        return data
+
+# 配置
+main_conf = conf_reader()
+users_conf = users_reader()
 
 
-def main_handler(event, context):
+def push_msg(title:str, msg: str):
+    # 推送功能设置
+    if main_conf['push']['serverchan']['enabled'] == True:
+        svc = ServerChan(main_conf['push']['serverchan']['sckey'])
+        svc.send(title,msg)
+
+    if main_conf['push']['cqhttp']['enabled'] == True:
+        cq = CQHTTP(main_conf['push']['cqhttp']['url'])
+        touser = main_conf['push']['cqhttp']['touser']
+
+        cqmsg = title + '\n' + msg
+
+        if  main_conf['push']['cqhttp']['isgroup']:
+            cq.send_group_msg(touser, cqmsg)
+        else:
+            cq.send_private_msg(touser, cqmsg)
+
+def push_start_msg(t: str):
+
+    title = '健康状况管控平台: 轮询任务开始执行'
+
+    msg = '时间: ' + t
+
+    push_msg(title, msg)
+
+
+def push_done_msg(first_count: int, second_count: int, third_count: int, done_count: int, fail_users: list, st):
+    fail_count = len(fail_users)
+    total_count = first_count + second_count + third_count + done_count + fail_count
+
+    title = '健康状况管控平台: 本次上报结果'
+
+    msg = '''
+
+\t总共: %s 人
+\t失败: %s 人
+\t用时: %s 秒
+
+\t首次: %s 人
+\t二次: %s 人
+\t三次: %s 人
+\t无需: %s 人
+
+''' % (total_count, fail_count, st, first_count, second_count, third_count, done_count)
+    if total_count != 0:
+        msg += "\n失败列表: \n\n"
+        # 失败列表
+        for u in fail_users:
+            msg += "\t" + u + "\n"
+
+    push_msg(title, msg)
+
+
+
+def report_all(username:str, password:str):
+    # 新建实例
+    litu = litUesr(username, password)
     # 判断是否登陆成功
     if litu.is_logged:
-        last_record = litu.get_last_record()
         # 判断今天是否上报过
         if not litu.is_record_today():
-            # 进行当日第一次体温上报
-            # 模式：使用上一次上报信息， 次数： 只上报第一次
-            data = litu.first_record(mode="last", rtimes=1)
-            print(data)
-            if data != None:
-                status = "成功"
+            # 读取第一次上报模式
+            if main_conf['report']['first']['temperature']:
+                data = litu.first_record(mode=main_conf['report']['first']['mode'], temperature=main_conf['report']['first']['temperature'], rtimes=1)
             else:
-                status = "失败"
-            svc.send(
-                ("健康状况管控平台: 第一次上报" + status),
-                ("温度: " + str(data["data"]["temperature"])),
-            )
-            qq.send_group_msg(qqgroup, "健康状况管控平台: 第一次上报成功")
+                data = litu.first_record(mode=main_conf['report']['first']['mode'], rtimes=1)
+            if data:
+                return 1
+
         # 判断今天是否第二次上报过
         elif not litu.is_record_today(2):
-            # 进行当日第二次体温上报
-            # 模式：手动填入， 温度： 36.6 摄氏度
-            data = litu.second_record(mode="manual", temperature=36.6)
-            if data != None:
-                status = "成功"
+            # 读取第二次上报模式
+            if main_conf['report']['second']['temperature']:
+                data = litu.second_record(mode=main_conf['report']['second']['mode'], temperature=main_conf['report']['second']['temperature'])
             else:
-                status = "失败"
-            svc.send(
-                ("健康状况管控平台: 第二次上报" + status),
-                ("温度: " + str(data["data"]["temperature"])),
-            )
-            qq.send_group_msg(qqgroup, "健康状况管控平台: 第二次上报成功")
+                data = litu.second_record(mode=main_conf['report']['second']['mode']['temperature'])
+            if data:
+                return 2
+
         # 判断今天是否第三次上报过
         elif not litu.is_record_today(rtime=3):
-            # 进行当日第三次体温上报
-            # 模式：随机生成正常体温(36.0~37.2 摄氏度)
-            data = litu.third_record(mode="random")
-            if data != None:
-                status = "成功"
+            # 读取第三次上报模式
+            if main_conf['report']['third']['temperature']:
+                data = litu.third_record(mode=main_conf['report']['third']['mode'], temperature=main_conf['report']['third']['temperature'])
             else:
-                status = "失败"
-            svc.send(
-                ("健康状况管控平台: 第三次上报" + status),
-                ("温度: " + str(data["data"]["temperature"])),
-            )
-            qq.send_group_msg(qqgroup, "健康状况管控平台: 第三次上报成功")
+                data = litu.third_record(mode=main_conf['report']['third']['mode']['temperature'])
+            if data:
+                return 3
         else:
-            svc.send(
-                "健康状况管控平台: 已完成今日上报任务",
-                "温度一: "
-                + str(last_record["data"]["temperature"])
-                + "\n\n温度二: "
-                + str(last_record["data"]["temperatureTwo"])
-                + "\n\n温度三: "
-                + str(last_record["data"]["temperatureThree"])
-                + "\n\n时间: "
-                + str(dt.datetime.now().strftime("%F %T")),
-            )
-            qq.send_group_msg(qqgroup, "健康状况管控平台: 已完成今日上报任务")
+            return 0
     else:
-        svc.send("健康状况管控平台: 登陆失败", "学号: " + litu.username + " 该用户无法登陆")
+        return -1
+
+def main_handler(event, context):
+
+    start = dt.datetime.now()
+    push_start_msg(str(start.strftime('%Y-%m-%d %H:%M:%S')))
+
+    # 计数器生成详情
+    first_count = 0
+    second_count = 0
+    third_count = 0
+    done_count = 0
+    fail_users = []
+
+    # 遍历帐号表进行上报
+    for u in users_conf:
+        rte = report_all(u[0],u[1])
+        if rte == 0:
+            done_count +=1
+        elif rte == 1:
+            first_count +=1
+        elif rte == 2:
+            second_count +=1
+        elif rte == 3:
+            third_count +=1
+        else:
+            fail_users.append(u[0])
+
+
+    end = dt.datetime.now()
+
+    st = (end - start).seconds
+
+    #print(first_count, second_count, third_count, done_count, fail_users)
+    push_done_msg(first_count, second_count, third_count, done_count, fail_users, str(st))
+
+main_handler("", "")

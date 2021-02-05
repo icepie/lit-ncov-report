@@ -1,0 +1,28 @@
+{
+    "report": {
+        "first": {
+            "mode": "last",
+            "temperature": 36.3
+        },
+        "second": {
+            "mode": "random",
+            "temperature": 36.2
+        },
+        "third": {
+            "mode": "manual",
+            "temperature": 36.1
+        }
+    },
+    "push": {
+        "serverchan": {
+            "enabled": true,
+            "sckey": "SCKEY"
+        },
+        "cqhttp": {
+            "enabled": false,
+            "url": "http://0.0.0.0:5700",
+            "touser": 0,
+            "isgroup": true
+        }
+    }
+}
