@@ -11,59 +11,75 @@ from server.cqhttp import CQHTTP
 # 读取主要设置
 def conf_reader():
     current_path = os.path.abspath(__file__)
-    config_file_path=os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),'conf.json')
-    with open(config_file_path, 'r') as f:
+    config_file_path = os.path.join(
+        os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),
+        "conf.json",
+    )
+    with open(config_file_path, "r") as f:
         data = json.load(f)
     return data
+
 
 # 读取用户配置
 def users_reader():
     current_path = os.path.abspath(__file__)
-    users_file_path=os.path.join(os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),'users.csv')
-    with open(users_file_path, 'r') as f:
+    users_file_path = os.path.join(
+        os.path.abspath(os.path.dirname(current_path) + os.path.sep + "conf"),
+        "users.csv",
+    )
+    with open(users_file_path, "r") as f:
         f_csv = csv.reader(f)
-        next(f_csv) 
+        next(f_csv)
         data = [row for row in f_csv]
         return data
+
 
 # 配置
 main_conf = conf_reader()
 users_conf = users_reader()
 
 
-def push_msg(title:str, msg: str):
+def push_msg(title: str, msg: str):
     # 推送功能设置
-    if main_conf['push']['serverchan']['enabled'] == True:
-        svc = ServerChan(main_conf['push']['serverchan']['sckey'])
-        svc.send(title,msg)
+    if main_conf["push"]["serverchan"]["enabled"] == True:
+        svc = ServerChan(main_conf["push"]["serverchan"]["sckey"])
+        svc.send(title, msg)
 
-    if main_conf['push']['cqhttp']['enabled'] == True:
-        cq = CQHTTP(main_conf['push']['cqhttp']['url'])
-        touser = main_conf['push']['cqhttp']['touser']
+    if main_conf["push"]["cqhttp"]["enabled"] == True:
+        cq = CQHTTP(main_conf["push"]["cqhttp"]["url"])
+        touser = main_conf["push"]["cqhttp"]["touser"]
 
-        cqmsg = title + '\n' + msg
+        cqmsg = title + "\n" + msg
 
-        if  main_conf['push']['cqhttp']['isgroup']:
+        if main_conf["push"]["cqhttp"]["isgroup"]:
             cq.send_group_msg(touser, cqmsg)
         else:
             cq.send_private_msg(touser, cqmsg)
 
+
 def push_start_msg(t: str):
 
-    title = '健康状况管控平台: 轮询任务开始执行'
+    title = "健康状况管控平台: 轮询任务开始执行"
 
-    msg = '时间: ' + t
+    msg = "时间: " + t
 
     push_msg(title, msg)
 
 
-def push_done_msg(first_count: int, second_count: int, third_count: int, done_count: int, fail_users: list, st):
+def push_done_msg(
+    first_count: int,
+    second_count: int,
+    third_count: int,
+    done_count: int,
+    fail_users: list,
+    st,
+):
     fail_count = len(fail_users)
     total_count = first_count + second_count + third_count + done_count + fail_count
 
-    title = '健康状况管控平台: 本次上报结果'
+    title = "健康状况管控平台: 本次上报结果"
 
-    msg = '''
+    msg = """
 
 \t总共: %s 人
 \t失败: %s 人
@@ -74,7 +90,15 @@ def push_done_msg(first_count: int, second_count: int, third_count: int, done_co
 \t三次: %s 人
 \t无需: %s 人
 
-''' % (total_count, fail_count, st, first_count, second_count, third_count, done_count)
+""" % (
+        total_count,
+        fail_count,
+        st,
+        first_count,
+        second_count,
+        third_count,
+        done_count,
+    )
     if total_count != 0:
         msg += "\n失败列表: \n\n"
         # 失败列表
@@ -84,8 +108,7 @@ def push_done_msg(first_count: int, second_count: int, third_count: int, done_co
     push_msg(title, msg)
 
 
-
-def report_all(username:str, password:str):
+def report_all(username: str, password: str):
     # 新建实例
     litu = litUesr(username, password)
     # 判断是否登陆成功
@@ -93,30 +116,46 @@ def report_all(username:str, password:str):
         # 判断今天是否上报过
         if not litu.is_record_today():
             # 读取第一次上报模式
-            if main_conf['report']['first']['temperature']:
-                data = litu.first_record(mode=main_conf['report']['first']['mode'], temperature=main_conf['report']['first']['temperature'], rtimes=1)
+            if main_conf["report"]["first"]["temperature"]:
+                data = litu.first_record(
+                    mode=main_conf["report"]["first"]["mode"],
+                    temperature=main_conf["report"]["first"]["temperature"],
+                    rtimes=1,
+                )
             else:
-                data = litu.first_record(mode=main_conf['report']['first']['mode'], rtimes=1)
+                data = litu.first_record(
+                    mode=main_conf["report"]["first"]["mode"], rtimes=1
+                )
             if data:
                 return 1
 
         # 判断今天是否第二次上报过
         elif not litu.is_record_today(2):
             # 读取第二次上报模式
-            if main_conf['report']['second']['temperature']:
-                data = litu.second_record(mode=main_conf['report']['second']['mode'], temperature=main_conf['report']['second']['temperature'])
+            if main_conf["report"]["second"]["temperature"]:
+                data = litu.second_record(
+                    mode=main_conf["report"]["second"]["mode"],
+                    temperature=main_conf["report"]["second"]["temperature"],
+                )
             else:
-                data = litu.second_record(mode=main_conf['report']['second']['mode']['temperature'])
+                data = litu.second_record(
+                    mode=main_conf["report"]["second"]["mode"]["temperature"]
+                )
             if data:
                 return 2
 
         # 判断今天是否第三次上报过
         elif not litu.is_record_today(rtime=3):
             # 读取第三次上报模式
-            if main_conf['report']['third']['temperature']:
-                data = litu.third_record(mode=main_conf['report']['third']['mode'], temperature=main_conf['report']['third']['temperature'])
+            if main_conf["report"]["third"]["temperature"]:
+                data = litu.third_record(
+                    mode=main_conf["report"]["third"]["mode"],
+                    temperature=main_conf["report"]["third"]["temperature"],
+                )
             else:
-                data = litu.third_record(mode=main_conf['report']['third']['mode']['temperature'])
+                data = litu.third_record(
+                    mode=main_conf["report"]["third"]["mode"]["temperature"]
+                )
             if data:
                 return 3
         else:
@@ -124,10 +163,11 @@ def report_all(username:str, password:str):
     else:
         return -1
 
+
 def main_handler(event, context):
 
     start = dt.datetime.now()
-    push_start_msg(str(start.strftime('%Y-%m-%d %H:%M:%S')))
+    push_start_msg(str(start.strftime("%Y-%m-%d %H:%M:%S")))
 
     # 计数器生成详情
     first_count = 0
@@ -138,24 +178,23 @@ def main_handler(event, context):
 
     # 遍历帐号表进行上报
     for u in users_conf:
-        rte = report_all(u[0],u[1])
+        rte = report_all(u[0], u[1])
         if rte == 0:
-            done_count +=1
+            done_count += 1
         elif rte == 1:
-            first_count +=1
+            first_count += 1
         elif rte == 2:
-            second_count +=1
+            second_count += 1
         elif rte == 3:
-            third_count +=1
+            third_count += 1
         else:
             fail_users.append(u[0])
-
 
     end = dt.datetime.now()
 
     st = (end - start).seconds
 
-    #print(first_count, second_count, third_count, done_count, fail_users)
-    push_done_msg(first_count, second_count, third_count, done_count, fail_users, str(st))
-
-main_handler("", "")
+    # print(first_count, second_count, third_count, done_count, fail_users)
+    push_done_msg(
+        first_count, second_count, third_count, done_count, fail_users, str(st)
+    )
