@@ -37,7 +37,7 @@ def is_outdate_last_record(lr):
     except:
         return True
 
-    if time_minus(get_now_time(), ct) > 60:
+    if time_minus(get_now_time(), ct) > 10:
         return True
 
     return False
