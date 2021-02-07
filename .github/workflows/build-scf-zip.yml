@@ -1,0 +1,31 @@
+name: Build SCF ZIP
+
+on:
+  push:
+    branches: [ scf ]
+  pull_request:
+    branches: [ scf ]
+
+  watch:
+    types: [started]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python
+      uses: actions/setup-python@v1
+    - name: Build zip
+      run: |
+        bash ./build.sh
+  
+    - name: Upload Firmware to Releases
+      uses: softprops/action-gh-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+      with:
+        tag_name: lit-ncov-report-scf
+        files: release/*

@@ -99,5 +99,7 @@ dmypy.json
 *.ps1
 *.sh
 
-# my test python file
+# my
 test.py
+scf
+release
