@@ -1,5 +1,6 @@
 # sha256 for password
 import hashlib
+import pytz
 import time
 import datetime
 import gb2260
@@ -11,8 +12,35 @@ def get_sha256(password: str):
     return str
 
 
+def get_now_time():
+    return datetime.datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime(
+        "%Y-%m-%d %H:%M:%S"
+    )
+
+
 def get_today_time():
-    return str(datetime.date.today())
+    return datetime.datetime.now(tz=pytz.timezone("Asia/Shanghai")).strftime("%Y-%m-%d")
+
+
+def time_minus(d1: str, d2: str):
+    # 2012-03-05 17:41:20
+    d1 = datetime.datetime.strptime(d1, "%Y-%m-%d %H:%M:%S")
+    d2 = datetime.datetime.strptime(d2, "%Y-%m-%d %H:%M:%S")
+    delta = d1 - d2
+    return delta.total_seconds()
+
+
+def is_outdate_last_record(lr):
+
+    try:
+        ct = lr["createTime"]
+    except:
+        return True
+
+    if time_minus(get_now_time(), ct) > 60:
+        return True
+
+    return False
 
 
 def is_valid_date(strdate):

@@ -38,6 +38,9 @@ class litUesr:
         except:
             self.is_logged = False
 
+        # init last record info
+        self.last_record = None
+
     def __login(self):
         data = {"cardNo": self.username, "password": self.password}
 
@@ -67,19 +70,22 @@ class litUesr:
 
         return res
 
+    def fetch_last_record(self):
+        if self.last_record == None or util.is_outdate_last_record(self.last_record):
+            self.last_record = self.get_last_record()["data"]
+
+        return self.last_record
+
     def is_record_today(self, rtime=1):
-        try:
-            # get the last record info
-            last_record = self.get_last_record()["data"]
-        except:
-            return None
+        last_record = self.fetch_last_record()
 
         if last_record["createTime"][0:10] == util.get_today_time():
+
             if rtime == 1:
                 return True
-            elif (rtime == 2) & (last_record["temperatureTwo"] != ""):
+            elif (rtime == 2) & (self.last_record["temperatureTwo"] != ""):
                 return True
-            elif (rtime == 3) & (last_record["temperatureThree"] != ""):
+            elif (rtime == 3) & (self.last_record["temperatureThree"] != ""):
                 return True
         else:
             return False
@@ -181,7 +187,7 @@ class litUesr:
         """
 
         # get the last record info
-        last_record = self.get_last_record()["data"]
+        last_record = self.fetch_last_record()
 
         data = {
             "mobile": self.info["mobile"],
@@ -287,7 +293,7 @@ class litUesr:
         """
 
         # get the last record info
-        last_record = self.get_last_record()["data"]
+        last_record = self.fetch_last_record()
 
         data = {
             "healthyRecordId": last_record["id"],
@@ -322,7 +328,7 @@ class litUesr:
         """
 
         # get the last record info
-        last_record = self.get_last_record()["data"]
+        last_record = self.fetch_last_record()
 
         data = {
             "healthyRecordId": last_record["id"],

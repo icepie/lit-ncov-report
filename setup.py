@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="litncov",
-    version="2.0.5",
+    version="2.0.6",
     description="A ncov report library and tool for LIT(Luoyang Institute of Science and Technology)",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -15,7 +15,7 @@ setup(
     author_email="icepie.dev@gmail.com",
     license="MIT",
     packages=["litncov"],
-    install_requires=["rich", "requests", "gb2260"],
+    install_requires=["rich", "requests", "gb2260", "pytz"],
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [

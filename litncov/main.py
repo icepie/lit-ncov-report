@@ -178,9 +178,10 @@ def main():
             if args.tirp:
                 console.log(testme.get_tirps())
         elif args.command == "query":
-            if not (util.is_valid_date(args.start_time) or (
-                not args.end_time and util.is_valid_date(args.end_time)
-            )):
+            if not (
+                util.is_valid_date(args.start_time)
+                or (not args.end_time and util.is_valid_date(args.end_time))
+            ):
                 console.log(
                     "[bold red]Error: Please use the correct time format ![/bold red]"
                 )
