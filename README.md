@@ -10,10 +10,11 @@
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-768887710-red.svg)](https://jq.qq.com/?_wv=1027&k=lz0XyN86)
 [![TG Group](https://img.shields.io/badge/TG%20Group-lit_edu-blue.svg)](https://t.me/lit_edu)
 
-
 ## 腾讯云SCF
 
-在**云函数控制台-新建-自定义模板**
+在**云函数控制台-新建-自定义模板**, 如图
+
+![tencent-scf](https://github.com/icepie/icepie.github.io/raw/src/img/image_2021-02-08_03-34-51.png)
 
 ### 函数代码
 
@@ -21,7 +22,7 @@
 
 2. 然后在**提交方法**, 中选择**本地上传zip包**的方式
 
-3. 在**执行方法**, 中使用 `index.main_handler` (一般默认就)
+3. 在**执行方法**, 中使用 `index.main_handler` (一般默认就可)
 
 3. 点击选择好文件即可
 
@@ -66,3 +67,7 @@
 点击部署, 再测试一下就没问题啦
 
 望使用愉快, 欢迎fork修改
+
+![scf-cq-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-cq-push.jpg))
+![scf-sc-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-sc-push.jpg)) 
+
