@@ -10,13 +10,12 @@
 [![QQ Group](https://img.shields.io/badge/QQ%20Group-768887710-red.svg)](https://jq.qq.com/?_wv=1027&k=lz0XyN86)
 [![TG Group](https://img.shields.io/badge/TG%20Group-lit_edu-blue.svg)](https://t.me/lit_edu)
 
-## 打包与部署
 
-### 腾讯云SCF
+## 腾讯云SCF
 
 在**云函数控制台-新建-自定义模板**
 
-#### 函数代码
+### 函数代码
 
 1. 在此 [releases](https://github.com/icepie/lit-ncov-report/releases/tag/lit-ncov-report-scf) 下载最新自动打包的版本
 
@@ -26,13 +25,13 @@
 
 3. 点击选择好文件即可
 
-#### 高级配置
+### 高级配置
 
 - 选中**固定出口IP** (推送服务正常工作的必要选项)
 
 - **执行超时时间** 设置为**900秒**
 
-### 触发器配置
+## 触发器配置
 
 **自定义创建-定时触发-自定义触发周期**
 
@@ -41,28 +40,29 @@
 0 0 6,12,20 * * * *
 ```
 
-### 程序配置
+## 程序配置
 
 在完成上诉操作后, 点击完成, 接下来打开**函数代码**进行配置
 
-#### 基本配置
+### 基本配置
 
 在`src/conf/conf.json`当中
 
 请自行查看并编辑
 
-#### 用户配置
+### 用户配置
 
 在`src/conf/users,csv`当中
 
 请自行添加~
 
-### 最后
+
+## 阿里云SCF
+请自行研究 :)
+
+
+## 最后
 
 点击部署, 再测试一下就没问题啦
 
 望使用愉快, 欢迎fork修改
-
-
-### 阿里云SCF
-请自行研究 :)
