@@ -68,6 +68,6 @@
 
 望使用愉快, 欢迎fork修改
 
-![scf-cq-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-cq-push.jpg))
-![scf-sc-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-sc-push.jpg)) 
+![scf-cq-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-cq-push.jpg)
+![scf-sc-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-sc-push.jpg) 
 
