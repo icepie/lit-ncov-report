@@ -60,9 +60,9 @@ def push_msg(title: str, msg: str):
 
 def push_start_msg(t: str):
 
-    title = "健康状况管控平台: 轮询任务开始执行"
+    title = "健康状况管控平台: 轮询任务准备执行"
 
-    msg = "时间: " + t
+    msg = "\t时间: " + t
 
     push_msg(title, msg)
 
@@ -100,7 +100,7 @@ def push_done_msg(
         third_count,
         done_count,
     )
-    if total_count != 0:
+    if fail_count != 0:
         msg += "\n失败列表: \n\n"
         # 失败列表
         for u in fail_users:
