@@ -71,12 +71,13 @@ class litUesr:
         return res
 
     def fetch_last_record(self):
+        '''tempTime will avoid '''
         if not util.is_outdate_last_record(self.last_record):
             return self.last_record
         else:
             try:
                 self.last_record = self.get_last_record()["data"]
-                self.last_record["createTime"] = util.get_now_time()
+                self.last_record["tempTime"] = util.get_now_time()
             except:
                 self.fetch_last_record()
             return self.last_record

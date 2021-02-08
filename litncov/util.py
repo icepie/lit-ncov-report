@@ -33,7 +33,7 @@ def time_minus(d1: str, d2: str):
 def is_outdate_last_record(lr):
 
     try:
-        ct = lr["createTime"]
+        ct = lr["tempTime"]
     except:
         return True
 
