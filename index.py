@@ -4,6 +4,7 @@ import os
 import json
 import csv
 import datetime as dt
+import litncov.util as util
 from litncov.user import litUesr
 from server.serverchan import ServerChan
 from server.cqhttp import CQHTTP
@@ -167,7 +168,7 @@ def report_all(username: str, password: str):
 def main_handler(event, context):
 
     start = dt.datetime.now()
-    push_start_msg(str(start.strftime("%Y-%m-%d %H:%M:%S")))
+    push_start_msg(util.get_now_time())
 
     # 计数器生成详情
     first_count = 0
