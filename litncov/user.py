@@ -71,7 +71,7 @@ class litUesr:
         return res
 
     def fetch_last_record(self):
-        '''tempTime will avoid '''
+        '''tempTime will avoid the duplicate requests'''
         if not util.is_outdate_last_record(self.last_record):
             return self.last_record
         else:
@@ -276,10 +276,6 @@ class litUesr:
                 data=json.dumps(data),
                 headers=self.__headers,
             )
-            # res['data']['temperature'] = data['temperature']
-            # res['data']['temperatureTwo'] = data['temperatureTwo']
-            # res['data']['temperatureThree'] = data['temperatureThree']
-            # {"success":true,"code":200,"msg":"请求成功","data":""}
         except:
             return None
 
