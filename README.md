@@ -36,7 +36,7 @@
 
 **自定义创建-定时触发-自定义触发周期**
 
-```js
+```corn
 # 例如每日 6点, 12点, 20点进行轮询上报
 0 0 6,12,20 * * * *
 ```
@@ -47,16 +47,56 @@
 
 ### 基本配置
 
-在`src/conf/conf.json`当中
+在`src/conf/conf.json`当中, 请自行查看并编辑
 
-请自行查看并编辑
+```json
+{
+    "report": {
+        "first": {
+            "mode": "last",
+            "temperature": 36.3
+        },
+        "second": {
+            "mode": "random",
+            "temperature": 36.2
+        },
+        "third": {
+            "mode": "manual",
+            "temperature": 36.1
+        }
+    },
+    "push": {
+        "serverchan": {
+            "enabled": true,
+            "sckey": "SCKEY"
+        },
+        "cqhttp": {
+            "enabled": false,
+            "url": "http://0.0.0.0:5700",
+            "touser": 0,
+            "isgroup": true
+        }
+    }
+}
+```
+
+- 上报模式: `last`, `random`, `manual` 分别代表 `上次记录温度`, `随机安全温度`, `手动填入温度(temperature)`
+
+- 推送方式: 目前支持 [serverchan](http://sc.ftqq.com), [cqhttp](https://github.com/Mrs4s/go-cqhttp), 
 
 ### 用户配置
 
-在`src/conf/users,csv`当中
+在`src/conf/users.csv`当中
 
-请自行添加~
+```csv
+user,pwd
+B19XXXXXX,PASS123
+Z20XXXXXX,PASS123
+```
 
+- 如上例, 即可实现多用户
+
+- 如需使用`v1`版本的用户配置, 请使用 [v1toscf.py](https://github.com/icepie/lit-ncov-report/blob/scf/v1toscf.py)
 
 ## 阿里云SCF
 请自行研究 :)
