@@ -60,7 +60,7 @@ def push_msg(title: str, msg: str):
 
 def push_start_msg(t: str):
 
-    title = "健康状况管控平台: 轮询任务准备执行"
+    title = "健康状况管控平台: 轮询任务执行"
 
     msg = "\t时间: " + t
 
