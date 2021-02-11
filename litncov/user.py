@@ -300,7 +300,9 @@ class litUesr:
             "contactProvince": last_record["contactProvince"],
             "contactCity": last_record["contactCity"],
             "contactDistrict": last_record["contactDistrict"],
-            "contactLocation": "",  # temporary emtpy
+            "contactLocation": util.current_location(
+                last_record["contactDistrict"], last_record["contactCity"]
+            ),
             "contactAddress": last_record["contactAddress"],
             "isAbroad": last_record["isAbroad"],
             "abroadInfo": last_record["abroadInfo"],
