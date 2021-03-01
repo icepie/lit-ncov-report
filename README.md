@@ -14,7 +14,7 @@
 
 在**云函数控制台-新建-自定义模板**, 如图
 
-![tencent-scf](https://github.com/icepie/icepie.github.io/raw/src/img/image_2021-02-08_03-34-51.png)
+![tencent-scf](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-b1ebbd3c-ca49-405b-957b-effe60782276/f35d1ce1-18b8-4f00-8452-6edf3118011b.png)
 
 ### 函数代码
 
@@ -108,6 +108,5 @@ Z20XXXXXX,PASS123
 
 望使用愉快, 欢迎fork修改
 
-![scf-cq-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-cq-push.jpg)
-![scf-sc-push](https://github.com/icepie/icepie.github.io/raw/src/img/scf-sc-push.jpg) 
-
+![scf-cq-push](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-b1ebbd3c-ca49-405b-957b-effe60782276/ae0a2dc0-3880-45ec-b9b6-57e2af3e3887.jpg)
+![scf-sc-push](https://vkceyugu.cdn.bspapp.com/VKCEYUGU-b1ebbd3c-ca49-405b-957b-effe60782276/b1f69c81-6c58-4321-8b89-e7a56f98d5b3.jpg) 
