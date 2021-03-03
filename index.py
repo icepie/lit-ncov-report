@@ -60,7 +60,7 @@ def push_msg(title: str, msg: str):
 
 def push_start_msg(t: str):
 
-    title = "健康状况管控平台: 轮询任务执行"
+    title = "健康状况管控平台: 轮询任务准备执行"
 
     msg = "\t时间: " + t
 
@@ -180,16 +180,22 @@ def main_handler(event, context):
     # 遍历帐号表进行上报
     for u in users_conf:
         rte = report_all(u[0], u[1])
+        print("账号:" + u[0])
         if rte == 0:
             done_count += 1
+            print("\t无需")
         elif rte == 1:
             first_count += 1
+            print("\t第一次上报成功")
         elif rte == 2:
             second_count += 1
+            print("\t第二次上报成功")
         elif rte == 3:
             third_count += 1
+            print("\t第三次上报成功")
         else:
             fail_users.append(u[0])
+            print("\t上报失败")
 
     end = dt.datetime.now()
 
