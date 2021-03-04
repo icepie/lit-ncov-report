@@ -47,7 +47,7 @@ class litUesr:
         # login func
         try:
             response = requests.post(
-                url=endpoints["login"], data=json.dumps(data), headers=self.__headers
+                url=endpoints["login"], data=json.dumps(data), headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -61,7 +61,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints["lastRecord"], params=data, headers=self.__headers
+                url=endpoints["lastRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -105,7 +105,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints["getInstructor"], params=data, headers=self.__headers
+                url=endpoints["getInstructor"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -121,7 +121,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints["getFamilys"], params=data, headers=self.__headers
+                url=endpoints["getFamilys"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -133,7 +133,7 @@ class litUesr:
     def get_important_city(self):
         try:
             response = requests.get(
-                url=endpoints["getImportantCity"], headers=self.__headers
+                url=endpoints["getImportantCity"], headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -149,7 +149,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints["getTrips"], params=data, headers=self.__headers
+                url=endpoints["getTrips"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -170,7 +170,7 @@ class litUesr:
 
         try:
             response = requests.get(
-                url=endpoints["queryRecord"], params=data, headers=self.__headers
+                url=endpoints["queryRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -343,7 +343,7 @@ class litUesr:
             response = requests.post(
                 url=endpoints["firstRecord"],
                 data=json.dumps(data),
-                headers=self.__headers,
+                headers=self.__headers, timeout=5,
             )
         except:
             return None
@@ -383,7 +383,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints["secondRecord"], params=data, headers=self.__headers
+                url=endpoints["secondRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -418,7 +418,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints["thirdRecord"], params=data, headers=self.__headers
+                url=endpoints["thirdRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -436,7 +436,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints["password"], params=data, headers=self.__headers
+                url=endpoints["password"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
