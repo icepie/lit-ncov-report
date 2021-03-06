@@ -82,7 +82,9 @@
 
 - 上报模式: `last`, `random`, `manual` 分别代表 `上次记录温度`, `随机安全温度`, `手动填入温度(temperature)`
 
-- 推送方式: 目前支持 [serverchan](http://sc.ftqq.com), [cqhttp](https://github.com/Mrs4s/go-cqhttp), 
+- 推送方式: 目前支持 [serverchan](http://sc.ftqq.com), [cqhttp](https://github.com/Mrs4s/go-cqhttp)
+
+- 注意: 轮询模式下 `second` 和 `third` 的 `mode` 请不要设置为 `last` (机制限制)
 
 ### 用户配置
 
