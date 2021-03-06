@@ -88,4 +88,4 @@ def current_location(currentDistrict, currentCity):
 
 def random_temp():
     """ build a random temp """
-    return round(random.uniform(36.0, 37.2), 2)
+    return round(random.uniform(36.0, 37.0), 1)
