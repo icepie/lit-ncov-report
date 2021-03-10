@@ -1,4 +1,3 @@
 rich
 requests
-gb2260
 pytz
