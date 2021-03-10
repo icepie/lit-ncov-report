@@ -157,7 +157,7 @@ class litUesr:
         res = response.json()
 
         return res
-
+    
     def query_record(self, st=util.get_today_time, et=util.get_today_time):
         data = {
             "pageNum": 1,
@@ -272,9 +272,7 @@ class litUesr:
             "currentProvince": last_record["currentProvince"],
             "currentCity": last_record["currentCity"],
             "currentDistrict": last_record["currentDistrict"],
-            "currentLocation": util.current_location(
-                last_record["currentDistrict"], last_record["currentCity"]
-            ),
+            "currentLocation": "",
             "currentAddress": last_record["currentAddress"],
             "villageIsCase": last_record["villageIsCase"],
             "caseAddress": last_record["caseAddress"],
@@ -300,9 +298,7 @@ class litUesr:
             "contactProvince": last_record["contactProvince"],
             "contactCity": last_record["contactCity"],
             "contactDistrict": last_record["contactDistrict"],
-            "contactLocation": util.current_location(
-                last_record["contactDistrict"], last_record["contactCity"]
-            ),
+            "contactLocation": "",
             "contactAddress": last_record["contactAddress"],
             "isAbroad": last_record["isAbroad"],
             "abroadInfo": last_record["abroadInfo"],
@@ -325,19 +321,25 @@ class litUesr:
             if rtimes == 3:
                 data["temperatureThree"] = last_record["temperatureThree"]
         elif mode == "random":
-            data["temperature"] = util.random_temp()
+            data["temperature"] = str(util.random_temp())
             if rtimes >= 2:
-                data["temperatureTwo"] = util.random_temp()
+                data["temperatureTwo"] = str(util.random_temp())
             if rtimes == 3:
-                data["temperatureThree"] = util.random_temp()
+                data["temperatureThree"] = str(util.random_temp())
         elif mode == "manual":
-            data["temperature"] = temperature
+            data["temperature"] = str(temperature)
             if rtimes >= 2:
-                data["temperatureTwo"] = temperatureTwo
+                data["temperatureTwo"] = str(temperatureTwo)
             if rtimes == 3:
-                data["temperatureThree"] = temperatureThree
+                data["temperatureThree"] = str(temperatureThree)
         else:
             return None
+
+        # check temperature
+        if rtimes >= 2 and data["temperatureTwo"] == "":
+            print("Warning: Incorrect temperatureTwo!")
+        if rtimes == 3 and data["temperatureThree"] == "":
+            print("Warning: Incorrect temperatureThree!")
 
         try:
             response = requests.post(
@@ -375,11 +377,15 @@ class litUesr:
         if mode == "last":
             pass
         elif mode == "random":
-            data["temperature"] = util.random_temp()
+            data["temperature"] = str(util.random_temp())
         elif mode == "manual":
-            data["temperature"] = temperature
+            data["temperature"] = str(temperature)
         else:
             return None
+
+        # check temperature
+        if data["temperature"] == "":
+            print("Warning: Incorrect temperatureTwo!")
 
         try:
             response = requests.put(
@@ -410,11 +416,15 @@ class litUesr:
         if mode == "last":
             pass
         elif mode == "random":
-            data["temperature"] = util.random_temp()
+            data["temperature"] = str(util.random_temp())
         elif mode == "manual":
-            data["temperature"] = temperature
+            data["temperature"] = str(temperature)
         else:
             return None
+
+        # check temperature
+        if data["temperature"] == "":
+            print("Warning: Incorrect temperatureThree!")
 
         try:
             response = requests.put(

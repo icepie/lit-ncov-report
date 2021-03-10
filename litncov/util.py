@@ -3,7 +3,6 @@ import hashlib
 import pytz
 import time
 import datetime
-import gb2260
 import random
 
 
@@ -60,30 +59,6 @@ def is_valid_date(strdate):
 #     ## time.struct_time(tm_year=2012, tm_mon=3, tm_mday=28, tm_hour=6, tm_min=53, tm_sec=40, tm_wday=2, tm_yday=88, tm_isdst=-1)
 #     ts = time.mktime(time.strptime(dt, '%Y-%m-%d %H:%M:%S'))
 #     return int(ts)
-
-
-def cl_build(current_district):
-    """ use gb2260 to build a CurrentLocation """
-    div_result = []
-    try:
-        division = gb2260.get(current_district)
-        for current in division.stack():
-            temp = str(u"{0}".format(current.name))
-            div_result.append(temp)
-            # use "-" to split str
-        return "-".join(str(i) for i in div_result)
-    except:
-        return None
-
-
-def current_location(currentDistrict, currentCity):
-    """ is not grace :( """
-    cl = cl_build(currentDistrict)
-    if cl == None:
-        cl = cl_build(currentCity)
-    if cl == None:
-        return None
-    return cl
 
 
 def random_temp():

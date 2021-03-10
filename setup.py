@@ -15,7 +15,7 @@ setup(
     author_email="icepie.dev@gmail.com",
     license="MIT",
     packages=["litncov"],
-    install_requires=["rich", "requests", "gb2260", "pytz"],
+    install_requires=["rich", "requests", "pytz"],
     python_requires=">=3.6",
     entry_points={
         "console_scripts": [
