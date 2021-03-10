@@ -14,4 +14,5 @@ endpoints = {
     "getImportantCity": hostname + "/teamImportantCity",
     "queryRecord": hostname + "/healthyRecordByUser",
     "password": hostname + "/password",
+    "countUnHealthy": hostname + "/dataV/countUnHealthy"
 }

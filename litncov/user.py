@@ -157,6 +157,39 @@ class litUesr:
         res = response.json()
 
         return res
+
+    def get_count_unhealthy(self):
+        data = {
+            "teamId": self.info["teamId"],
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, timeout=5
+            )
+        except:
+            return None
+
+        res = response.json()
+
+        return res
+
+    def get_unhealthy_count(self):
+        data = {
+            "teamId": self.info["teamId"],
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, timeout=5
+            )
+        except:
+            return None
+
+        res = response.json()
+
+        return res
+
     
     def query_record(self, st=util.get_today_time, et=util.get_today_time):
         data = {
