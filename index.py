@@ -199,6 +199,7 @@ def main_handler(event, context):
 
     end = dt.datetime.now()
 
+    # 计算所用时间
     st = (end - start).seconds
 
     # print(first_count, second_count, third_count, done_count, fail_users)
