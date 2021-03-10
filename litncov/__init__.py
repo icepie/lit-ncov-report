@@ -14,5 +14,13 @@ endpoints = {
     "getImportantCity": hostname + "/teamImportantCity",
     "queryRecord": hostname + "/healthyRecordByUser",
     "password": hostname + "/password",
-    "countUnHealthy": hostname + "/dataV/countUnHealthy"
+    "unHealthyCount": hostname + "/dataV/countUnHealthy",
+    "reportCount": hostname + "/healthyReportCount"
+}
+
+
+identitys = {
+    "student": "1000401",
+    "teacher": "1000402",
+    "other": "1000405"
 }

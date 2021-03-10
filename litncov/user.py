@@ -4,6 +4,7 @@ import requests
 import json
 
 from litncov import endpoints
+from litncov import identitys
 from litncov import util
 
 
@@ -190,6 +191,28 @@ class litUesr:
 
         return res
 
+
+    def get_report_count(self, type:str):
+
+        if type not in identitys:
+            print("Warning: Incorrect type!")
+
+        data = {
+            "teamId": self.info["teamId"],
+            "identity": identitys[type],
+            "organizationIds": ""
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints["reportCount"], params=data, headers=self.__headers, timeout=5
+            )
+        except:
+            return None
+
+        res = response.json()
+
+        return res
     
     def query_record(self, st=util.get_today_time, et=util.get_today_time):
         data = {
