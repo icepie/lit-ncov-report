@@ -56,6 +56,13 @@ class litUesr:
         res = response.json()
 
         return res
+    
+    def relogin(self):
+        # login the acconut
+        try:
+            self.login = self.__login()
+        except:
+            self.info = None
 
     def get_last_record(self):
         data = {"teamId": self.info["teamId"], "userId": self.info["userId"]}
