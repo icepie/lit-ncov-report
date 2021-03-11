@@ -214,10 +214,10 @@ class litUesr:
 
         return res
     
-    def query_record(self, st=util.get_today_time, et=util.get_today_time):
+    def query_record(self, st, et=util.get_today_time):
         data = {
             "pageNum": 1,
-            "pageSize": 20,
+            "pageSize": 11,
             "userId": self.info["userId"],
             "teamId": self.info["teamId"],
             "startTime": st,
@@ -389,6 +389,7 @@ class litUesr:
             if rtimes == 3:
                 data["temperatureThree"] = str(temperatureThree)
         else:
+            print("Error: Incorrect report mode!")
             return None
 
         # check temperature
@@ -418,7 +419,7 @@ class litUesr:
 
     def second_record(self, mode="last", temperature=36.6):
         """
-        mode: 'last', 'random' and 'manual'
+        mode: 'random' and 'manual'
         """
 
         # get the last record info
@@ -430,13 +431,12 @@ class litUesr:
             "temperatureNormal": last_record["temperatureNormal"],
         }
 
-        if mode == "last":
-            pass
-        elif mode == "random":
+        if mode == "random":
             data["temperature"] = str(util.random_temp())
         elif mode == "manual":
             data["temperature"] = str(temperature)
         else:
+            print("Error: Incorrect report mode!")
             return None
 
         # check temperature
@@ -457,7 +457,7 @@ class litUesr:
 
     def third_record(self, mode="last", temperature=36.6):
         """
-        mode: 'last', 'random' and 'manual'
+        mode: 'random' and 'manual'
         """
 
         # get the last record info
@@ -469,13 +469,12 @@ class litUesr:
             "temperatureNormal": last_record["temperatureNormal"],
         }
 
-        if mode == "last":
-            pass
-        elif mode == "random":
+        if mode == "random":
             data["temperature"] = str(util.random_temp())
         elif mode == "manual":
             data["temperature"] = str(temperature)
         else:
+            print("Error: Incorrect report mode!")
             return None
 
         # check temperature

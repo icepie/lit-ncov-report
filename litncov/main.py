@@ -151,6 +151,10 @@ def main():
                         console.log(
                             testme.second_record(mode=args.mode, temperature=args.temp)
                         )
+                    elif args.mode == "last":
+                        console.log(
+                            "[bold red]Error: The last mode only support first report ![/bold red]"
+                        )
                     else:
                         console.log(testme.second_record(mode=args.mode))
                 elif int(args.rtime) == 3 and (
@@ -159,6 +163,10 @@ def main():
                     if args.mode == "manual":
                         console.log(
                             testme.third_record(mode=args.mode, temperature=args.temp)
+                        )
+                    elif args.mode == "last":
+                        console.log(
+                            "[bold red]Error: The last mode only support first report ![/bold red]"
                         )
                     else:
                         console.log(testme.third_record(mode=args.mode))
