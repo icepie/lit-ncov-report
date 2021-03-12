@@ -220,6 +220,23 @@ class litUesr:
         res = response.json()
 
         return res
+
+    def get_access_count(self):
+
+        data = {
+            "teamId": self.info["teamId"],
+        }
+
+        try:
+            response = requests.get(
+                url=endpoints["accessCertificateCount"], params=data, headers=self.__headers, timeout=5
+            )
+        except:
+            return None
+
+        res = response.json()
+
+        return res
     
     def query_record(self, st, et=util.get_today_time):
         data = {

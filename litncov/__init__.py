@@ -15,7 +15,8 @@ endpoints = {
     "queryRecord": hostname + "/healthyRecordByUser",
     "password": hostname + "/password",
     "unHealthyCount": hostname + "/dataV/countUnHealthy",
-    "reportCount": hostname + "/healthyReportCount"
+    "reportCount": hostname + "/healthyReportCount",
+    "accessCertificateCount": hostname + "/dataV/countAccessCertificate"
 }
 
 
