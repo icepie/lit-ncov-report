@@ -164,7 +164,7 @@ def report_all(username: str, password: str):
     else:
         return -1
 
-
+# 腾讯云 云函数 入口
 def main_handler(event, context):
 
     start = dt.datetime.now()
@@ -206,3 +206,7 @@ def main_handler(event, context):
     push_done_msg(
         first_count, second_count, third_count, done_count, fail_users, str(st)
     )
+
+# 阿里云 函数计算 入口 
+def handler(event, context):
+    main_handler(event, context)
