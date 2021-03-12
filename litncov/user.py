@@ -166,14 +166,14 @@ class litUesr:
 
         return res
 
-    def get_count_unhealthy(self):
+    def get_in_team_count(self):
         data = {
             "teamId": self.info["teamId"],
         }
 
         try:
             response = requests.get(
-                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["isInTeamCityCount"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None

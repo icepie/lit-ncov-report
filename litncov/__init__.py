@@ -16,7 +16,8 @@ endpoints = {
     "password": hostname + "/password",
     "unHealthyCount": hostname + "/dataV/countUnHealthy",
     "reportCount": hostname + "/healthyReportCount",
-    "accessCertificateCount": hostname + "/dataV/countAccessCertificate"
+    "accessCertificateCount": hostname + "/dataV/countAccessCertificate",
+    "isInTeamCityCount": hostname + "/dataV/countIsInTeamCity"
 }
 
 
