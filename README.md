@@ -1,6 +1,5 @@
 ## lit-ncov-report
 洛阳理工学院 "健康状况管控平台" 的一个非官方`Python封装库`兼`CLI工具`与`拓展实现` (for severless)
-> 传送门: [scf](https://github.com/icepie/lit-ncov-report/tree/scf)
 
 [![Build SCF ZIP](https://github.com/icepie/lit-ncov-report/actions/workflows/build-scf-zip.yml/badge.svg)](https://github.com/icepie/lit-ncov-report/actions/workflows/build-scf-zip.yml) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 
