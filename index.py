@@ -179,23 +179,32 @@ def main_handler(event, context):
 
     # 遍历帐号表进行上报
     for u in users_conf:
-        rte = report_all(u[0], u[1])
-        print("账号:" + u[0])
-        if rte == 0:
-            done_count += 1
-            print("\t无需")
-        elif rte == 1:
-            first_count += 1
-            print("\t第一次上报成功")
-        elif rte == 2:
-            second_count += 1
-            print("\t第二次上报成功")
-        elif rte == 3:
-            third_count += 1
-            print("\t第三次上报成功")
-        else:
-            fail_users.append(u[0])
-            print("\t上报失败")
+        # 如果失败会重试三次, 后面加到配置里设置吧
+        i = 1
+        while i <= 3:
+            rte = report_all(u[0], u[1])
+            print("账号:" + u[0])
+            if rte == 0:
+                done_count += 1
+                print("\t无需")
+                break
+            elif rte == 1:
+                first_count += 1
+                print("\t第一次上报成功")
+                break
+            elif rte == 2:
+                second_count += 1
+                print("\t第二次上报成功")
+                break
+            elif rte == 3:
+                third_count += 1
+                print("\t第三次上报成功")
+                break
+            else:
+                if i == 3:
+                    fail_users.append(u[0])
+                    print("\t上报失败")
+                i = i + 1
 
     end = dt.datetime.now()
 
