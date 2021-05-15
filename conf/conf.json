@@ -15,7 +15,11 @@
     },
     "push": {
         "serverchan": {
-            "enabled": true,
+            "enabled": false,
+            "sckey": "SCKEY"
+        },
+        "serverchan_turbo": {
+            "enabled": false,
             "sckey": "SCKEY"
         },
         "cqhttp": {

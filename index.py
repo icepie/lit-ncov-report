@@ -7,6 +7,7 @@ import datetime as dt
 import litncov.util as util
 from litncov.user import litUesr
 from server.serverchan import ServerChan
+from server.serverchan import ServerChanTurbo
 from server.cqhttp import CQHTTP
 
 # 读取主要设置
@@ -41,21 +42,29 @@ users_conf = users_reader()
 
 
 def push_msg(title: str, msg: str):
-    # 推送功能设置
-    if main_conf["push"]["serverchan"]["enabled"] == True:
-        svc = ServerChan(main_conf["push"]["serverchan"]["sckey"])
-        svc.send(title, msg)
+    try:
+        # 推送功能设置
+        if main_conf["push"]["serverchan"]["enabled"] == True:
+            svc = ServerChan(main_conf["push"]["serverchan"]["sckey"])
+            svc.send(title, msg)
 
-    if main_conf["push"]["cqhttp"]["enabled"] == True:
-        cq = CQHTTP(main_conf["push"]["cqhttp"]["url"])
-        touser = main_conf["push"]["cqhttp"]["touser"]
+        if main_conf["push"]["serverchan_turbo"]["enabled"] == True:
+            svc = ServerChanTurbo(main_conf["push"]["serverchan_turbo"]["sckey"])
+            svc.send(title, msg)
 
-        cqmsg = title + "\n" + msg
+        if main_conf["push"]["cqhttp"]["enabled"] == True:
+            cq = CQHTTP(main_conf["push"]["cqhttp"]["url"])
+            touser = main_conf["push"]["cqhttp"]["touser"]
 
-        if main_conf["push"]["cqhttp"]["isgroup"]:
-            cq.send_group_msg(touser, cqmsg)
-        else:
-            cq.send_private_msg(touser, cqmsg)
+            cqmsg = title + "\n" + msg
+
+            if main_conf["push"]["cqhttp"]["isgroup"]:
+                cq.send_group_msg(touser, cqmsg)
+            else:
+                cq.send_private_msg(touser, cqmsg)
+
+    except:
+        print("推送失败, 请检查相关配置!")
 
 
 def push_start_msg(t: str):
@@ -219,3 +228,6 @@ def main_handler(event, context):
 # 阿里云 函数计算 入口 
 def handler(event, context):
     main_handler(event, context)
+
+
+#handler("","")

@@ -11,6 +11,8 @@
 > 
 > 等闲下来再更新
 
+- 请及时更新到 `20210515` 版本, 以修复正常功能
+
 ### 待修复
 
 - `20210303` 及之前发布版本中的基本配置里的 `second` 和 `third` 的模式请不要设置为 `last`
@@ -176,7 +178,11 @@
     },
     "push": {
         "serverchan": {
-            "enabled": true,
+            "enabled": false,
+            "sckey": "SCKEY"
+        },
+        "serverchan_turbo": {
+            "enabled": false,
             "sckey": "SCKEY"
         },
         "cqhttp": {
