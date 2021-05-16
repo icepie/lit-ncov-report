@@ -176,6 +176,8 @@ def report_all(username: str, password: str):
 # 腾讯云 云函数 入口
 def main_handler(event, context):
 
+    print("上报任务开始执行!")
+
     start = dt.datetime.now()
     push_start_msg(util.get_now_time())
 
@@ -230,4 +232,18 @@ def handler(event, context):
     main_handler(event, context)
 
 
-#handler("","")
+# 服务器玩家请 $ git clone https://github.com/icepie/lit-ncov-report -b scf 
+# 1. $ pip install apscheduler
+# 2. 再去掉以下注释
+# 3. 修改相关配置
+# 最后执行 $ python index.py
+
+# def main():
+#     handler("","")
+
+# if __name__=="__main__":
+#     from apscheduler.schedulers.background import BlockingScheduler
+#     sched = BlockingScheduler()
+#     sched.add_job(main, 'cron', hour="1, 6, 14" , minute=30) # 每天 01:30, 06:30, 14:30 轮询上报
+#     print("进程开始!")
+#     sched.start()
