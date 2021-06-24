@@ -1,23 +1,25 @@
 # the platform url
-hostname = "http://hmgr.sec.lit.edu.cn/wms"
+host = "http://hmgr.sec.lit.edu.cn"
+muyunhost = host + "/web"
+mainhost = host + "/wms"
 
 # the main api
 endpoints = {
-    "login": hostname + "/healthyLogin",
-    "lastRecord": hostname + "/lastHealthyRecord",
-    "firstRecord": hostname + "/addHealthyRecord",
-    "secondRecord": hostname + "/addTwoHealthyRecord",
-    "thirdRecord": hostname + "/addThreeHealthyRecord",
-    "getInstructor": hostname + "/getInstructor",
-    "getFamilys": hostname + "/familys/personal",
-    "getTrips": hostname + "/trips/personal",
-    "getImportantCity": hostname + "/teamImportantCity",
-    "queryRecord": hostname + "/healthyRecordByUser",
-    "password": hostname + "/password",
-    "unHealthyCount": hostname + "/dataV/countUnHealthy",
-    "reportCount": hostname + "/healthyReportCount",
-    "accessCertificateCount": hostname + "/dataV/countAccessCertificate",
-    "isInTeamCityCount": hostname + "/dataV/countIsInTeamCity"
+    "login": mainhost + "/healthyLogin",
+    "lastRecord": mainhost + "/lastHealthyRecord",
+    "firstRecord": mainhost + "/addHealthyRecord",
+    "secondRecord": mainhost + "/addTwoHealthyRecord",
+    "thirdRecord": mainhost + "/addThreeHealthyRecord",
+    "getInstructor": mainhost + "/getInstructor",
+    "getFamilys": mainhost + "/familys/personal",
+    "getTrips": mainhost + "/trips/personal",
+    "getImportantCity": mainhost + "/teamImportantCity",
+    "queryRecord": mainhost + "/healthyRecordByUser",
+    "password": mainhost + "/password",
+    "unHealthyCount": mainhost + "/dataV/countUnHealthy",
+    "reportCount": mainhost + "/healthyReportCount",
+    "accessCertificateCount": mainhost + "/dataV/countAccessCertificate",
+    "isInTeamCityCount": mainhost + "/dataV/countIsInTeamCity"
 }
 
 
