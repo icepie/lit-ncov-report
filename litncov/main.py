@@ -42,7 +42,7 @@ def main():
     info.add_argument(
         "-i", "--instructor", action="store_true", help="the user instructor info"
     )
-    info.add_argument("-t", "--tirp", action="store_true", help="the user tirp info")
+    info.add_argument("-t", "--trip", action="store_true", help="the user tirp info")
 
     query = subparsers.add_parser("query", help="query history of the user report")
     query.add_argument(
@@ -183,8 +183,8 @@ def main():
                 console.log(testme.get_familys())
             if args.instructor:
                 console.log(testme.get_instructor())
-            if args.tirp:
-                console.log(testme.get_tirps())
+            if args.trip:
+                console.log(testme.get_trips())
         elif args.command == "query":
             if not (
                 util.is_valid_date(args.start_time)
