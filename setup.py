@@ -1,4 +1,5 @@
-from os import path as os_path
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 from setuptools import setup
 
 with open("README.md", "r") as fh:
