@@ -127,10 +127,12 @@ class litUesr:
 
             if rtime == 1:
                 return True
-            elif (rtime == 2) & (self.last_record["temperatureTwo"] != ""):
+            elif (rtime == 2) & (self.last_record["temperatureTwo"] != "" & self.last_record["temperatureTwo"] != None):
                 return True
-            elif (rtime == 3) & (self.last_record["temperatureThree"] != ""):
+            elif (rtime == 3) & (self.last_record["temperatureThree"] != "" & self.last_record["temperatureTwo"] != None ):
                 return True
+            else:
+                return False
         else:
             return False
 
