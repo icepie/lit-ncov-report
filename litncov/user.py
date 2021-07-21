@@ -15,6 +15,7 @@ class litUesr:
     """lit uesr object"""
 
     def __init__(self, username: str, password: str):
+        self.session = requests.Session()
         self.username = username
         self.password = util.get_sha256(password)
 
@@ -30,63 +31,84 @@ class litUesr:
         }
 
 
-        self.__cookies = {
-           # "muyun_sign_cookie": "7034bbc44c88bcb8781dae8af9e474ca"
-        }
+        # self.__cookies = {
+        #    # "muyun_sign_cookie": "7034bbc44c88bcb8781dae8af9e474ca"
+        # }
+
+        self.proxies = None
 
         #login the acconut
         try:
-            self.__set_cookies()
+            # self.__set_cookies()
             self.login = self.__login()
         except:
             self.info = None
-
-        # get the user info
-        try:
-            self.info = self.login["data"]
-        except:
-            self.info = None
-
-        # update some values
-        try:
-            self.__headers["token"] = self.info["token"]
-            self.is_logged = True
-        except:
-            self.is_logged = False
 
         # init last record info
         self.last_record = None
 
     def __set_cookies(self):
         try:
-            response = requests.head(
-                url=muyunhost, timeout=5, headers=self.__headers, allow_redirects=False
+            self.session.head(
+                url=muyunhost, timeout=5, headers=self.__headers
             )
 
-            self.__cookies = response.cookies
+            # self.__cookies = response.cookies
         except:
             pass
 
+        # print(response.text)
+
         return
 
+    def is_logged(self):
+        try:
+            self.get_last_record()
+            return True
+        except:
+            return False
+
     def __login(self):
+
+        self.__set_cookies()
+
         data = {"cardNo": self.username, "password": self.password}
+
 
         #login func
         try:
-            response = requests.post(
-                url=endpoints["login"], data=json.dumps(data), headers=self.__headers, cookies=self.__cookies, timeout=5,verify=False
+            response =self.session.post(
+                url=endpoints["login"], data=json.dumps(data), headers=self.__headers, timeout=5,verify=False
             )
-            #print(response.text)
+
+            print(response.text)
 
             # print(curlify.to_curl(response.request))
+        # get the user info
+        
+
         except:
             return None
 
+        # print(response.text)
         res = response.json()
 
+        try:
+            self.info = res["data"]
+        except:
+            self.info = None
+
+        # update some values
+        try:
+            self.__headers["token"] = self.info["token"]
+            
+        except:
+            pass
+
+
+
         return res
-    
+
     def relogin(self):
         # login the acconut
         try:
@@ -94,12 +116,27 @@ class litUesr:
         except:
             self.info = None
 
+    def set_proxy(self, proxy_url):
+        proxies = {
+            "http": proxy_url,
+            "https": proxy_url,
+        }
+
+        self.session.proxies.update(proxies)
+
+        # login the acconut
+        try:
+            self.login = self.__login()
+        except:
+            self.info = None
+        return
+
     def get_last_record(self):
         data = {"teamId": self.info["teamId"], "userId": self.info["userId"]}
 
         try:
-            response = requests.get(
-                url=endpoints["lastRecord"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["lastRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -127,9 +164,9 @@ class litUesr:
 
             if rtime == 1:
                 return True
-            elif (rtime == 2) & (self.last_record["temperatureTwo"] != "" & self.last_record["temperatureTwo"] != None):
+            elif (rtime == 2) and (self.last_record["temperatureTwo"] != "" and self.last_record["temperatureTwo"] != None):
                 return True
-            elif (rtime == 3) & (self.last_record["temperatureThree"] != "" & self.last_record["temperatureTwo"] != None ):
+            elif (rtime == 3) and (self.last_record["temperatureThree"] != "" and self.last_record["temperatureTwo"] != None ):
                 return True
             else:
                 return False
@@ -144,8 +181,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["getInstructor"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["getInstructor"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -160,8 +197,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["getFamilys"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["getFamilys"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -172,8 +209,8 @@ class litUesr:
 
     def get_important_city(self):
         try:
-            response = requests.get(
-                url=endpoints["getImportantCity"], headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["getImportantCity"], headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -188,8 +225,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["getTrips"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["getTrips"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -204,8 +241,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["isInTeamCityCount"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["isInTeamCityCount"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -220,8 +257,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -243,8 +280,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["reportCount"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["reportCount"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -260,8 +297,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["accessCertificateCount"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["accessCertificateCount"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -281,8 +318,8 @@ class litUesr:
         }
 
         try:
-            response = requests.get(
-                url=endpoints["queryRecord"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.get(
+                url=endpoints["queryRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -455,10 +492,10 @@ class litUesr:
             print("Warning: Incorrect temperatureThree!")
 
         try:
-            response = requests.post(
+            response = self.session.post(
                 url=endpoints["firstRecord"],
                 data=json.dumps(data),
-                headers=self.__headers, cookies=self.__cookies, timeout=5,
+                headers=self.__headers, timeout=5,
             )
         except:
             return None
@@ -500,8 +537,8 @@ class litUesr:
             print("Warning: Incorrect temperatureTwo!")
 
         try:
-            response = requests.put(
-                url=endpoints["secondRecord"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.put(
+                url=endpoints["secondRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -539,7 +576,7 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints["thirdRecord"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+                url=endpoints["thirdRecord"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
@@ -556,8 +593,8 @@ class litUesr:
         data = {"password": util.get_sha256(psw)}
 
         try:
-            response = requests.put(
-                url=endpoints["password"], params=data, headers=self.__headers, cookies=self.__cookies, timeout=5
+            response = self.session.put(
+                url=endpoints["password"], params=data, headers=self.__headers, timeout=5
             )
         except:
             return None
