@@ -63,8 +63,10 @@ class litUesr:
 
     def is_logged(self):
         try:
-            self.get_last_record()
-            return True
+            if self.get_last_record()['code'] == 200:
+                return True
+            else:
+                return False
         except:
             return False
 

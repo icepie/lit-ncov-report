@@ -41,7 +41,7 @@ from litncov.user import litUesr
 testme = litUesr("username", "password")
 
 # 判断是否登陆成功
-if testme.is_logged:
+if testme.is_logged():
     # 打印用户信息
     print(testme.info)
     # 打印上次上报信息
