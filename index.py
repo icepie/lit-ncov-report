@@ -122,7 +122,7 @@ def report_all(username: str, password: str):
     # 新建实例
     litu = litUesr(username, password)
     # 判断是否登陆成功
-    if litu.is_logged:
+    if litu.is_logged():
         # 判断今天是否上报过
         if not litu.is_record_today():
             # 读取第一次上报模式
