@@ -62,5 +62,5 @@ def is_valid_date(strdate):
 
 
 def random_temp():
-    """ build a random temp """
+    """build a random temp"""
     return round(random.uniform(36.0, 37.0), 1)

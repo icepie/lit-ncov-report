@@ -19,12 +19,8 @@ endpoints = {
     "unHealthyCount": mainhost + "/dataV/countUnHealthy",
     "reportCount": mainhost + "/healthyReportCount",
     "accessCertificateCount": mainhost + "/dataV/countAccessCertificate",
-    "isInTeamCityCount": mainhost + "/dataV/countIsInTeamCity"
+    "isInTeamCityCount": mainhost + "/dataV/countIsInTeamCity",
 }
 
 
-identitys = {
-    "student": "1000401",
-    "teacher": "1000402",
-    "other": "1000405"
-}
+identitys = {"student": "1000401", "teacher": "1000402", "other": "1000405"}

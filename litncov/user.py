@@ -2,13 +2,13 @@
 # -*- coding: UTF-8 -*-
 import requests
 import json
+
 # import curlify
 
 from litncov import muyunhost
 from litncov import endpoints
 from litncov import identitys
 from litncov import util
-
 
 
 class litUesr:
@@ -20,16 +20,15 @@ class litUesr:
         self.password = util.get_sha256(password)
 
         self.__headers = {
-            'Proxy-Connection': 'keep-alive',
-            'Accept': 'application/json, text/plain, */*',
-            'DNT': '1',
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36',
-            'Content-Type': 'application/json;charset=UTF-8;Access-Control-Allow-Headers',
-            'Origin': 'http://hmgr.sec.lit.edu.cn',
-            'Referer': 'http://hmgr.sec.lit.edu.cn/web/',
-            'Accept-Language': 'zh-CN,zh;q=0.9',
+            "Proxy-Connection": "keep-alive",
+            "Accept": "application/json, text/plain, */*",
+            "DNT": "1",
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36",
+            "Content-Type": "application/json;charset=UTF-8;Access-Control-Allow-Headers",
+            "Origin": "http://hmgr.sec.lit.edu.cn",
+            "Referer": "http://hmgr.sec.lit.edu.cn/web/",
+            "Accept-Language": "zh-CN,zh;q=0.9",
         }
-
 
         # self.__cookies = {
         #    # "muyun_sign_cookie": "7034bbc44c88bcb8781dae8af9e474ca"
@@ -37,7 +36,7 @@ class litUesr:
 
         self.proxies = None
 
-        #login the acconut
+        # login the acconut
         try:
             # self.__set_cookies()
             self.login = self.__login()
@@ -49,9 +48,7 @@ class litUesr:
 
     def __set_cookies(self):
         try:
-            self.session.head(
-                url=muyunhost, timeout=5, headers=self.__headers
-            )
+            self.session.head(url=muyunhost, timeout=5, headers=self.__headers)
 
             # self.__cookies = response.cookies
         except:
@@ -63,7 +60,7 @@ class litUesr:
 
     def is_logged(self):
         try:
-            if self.get_last_record()['code'] == 200:
+            if self.get_last_record()["code"] == 200:
                 return True
             else:
                 return False
@@ -76,18 +73,20 @@ class litUesr:
 
         data = {"cardNo": self.username, "password": self.password}
 
-
-        #login func
+        # login func
         try:
-            response =self.session.post(
-                url=endpoints["login"], data=json.dumps(data), headers=self.__headers, timeout=5,verify=False
+            response = self.session.post(
+                url=endpoints["login"],
+                data=json.dumps(data),
+                headers=self.__headers,
+                timeout=5,
+                verify=False,
             )
 
-            print(response.text)
+            # print(response.text)
 
             # print(curlify.to_curl(response.request))
         # get the user info
-        
 
         except:
             return None
@@ -103,11 +102,9 @@ class litUesr:
         # update some values
         try:
             self.__headers["token"] = self.info["token"]
-            
+
         except:
             pass
-
-
 
         return res
 
@@ -138,7 +135,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["lastRecord"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["lastRecord"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -148,7 +148,7 @@ class litUesr:
         return res
 
     def fetch_last_record(self):
-        '''tempTime will avoid the duplicate requests'''
+        """tempTime will avoid the duplicate requests"""
         if not util.is_outdate_last_record(self.last_record):
             return self.last_record
         else:
@@ -166,9 +166,15 @@ class litUesr:
 
             if rtime == 1:
                 return True
-            elif (rtime == 2) and (self.last_record["temperatureTwo"] != "" and self.last_record["temperatureTwo"] != None):
+            elif (rtime == 2) and (
+                self.last_record["temperatureTwo"] != ""
+                and self.last_record["temperatureTwo"] != None
+            ):
                 return True
-            elif (rtime == 3) and (self.last_record["temperatureThree"] != "" and self.last_record["temperatureTwo"] != None ):
+            elif (rtime == 3) and (
+                self.last_record["temperatureThree"] != ""
+                and self.last_record["temperatureTwo"] != None
+            ):
                 return True
             else:
                 return False
@@ -184,7 +190,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["getInstructor"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["getInstructor"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -200,7 +209,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["getFamilys"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["getFamilys"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -228,7 +240,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["getTrips"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["getTrips"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -244,7 +259,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["isInTeamCityCount"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["isInTeamCityCount"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -260,7 +278,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["countUnHealthy"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["countUnHealthy"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -269,8 +290,7 @@ class litUesr:
 
         return res
 
-
-    def get_report_count(self, type:str):
+    def get_report_count(self, type: str):
 
         if type not in identitys:
             print("Warning: Incorrect type!")
@@ -278,12 +298,15 @@ class litUesr:
         data = {
             "teamId": self.info["teamId"],
             "identity": identitys[type],
-            "organizationIds": ""
+            "organizationIds": "",
         }
 
         try:
             response = self.session.get(
-                url=endpoints["reportCount"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["reportCount"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -300,7 +323,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["accessCertificateCount"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["accessCertificateCount"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -308,7 +334,7 @@ class litUesr:
         res = response.json()
 
         return res
-    
+
     def query_record(self, st, et=util.get_today_time):
         data = {
             "pageNum": 1,
@@ -321,7 +347,10 @@ class litUesr:
 
         try:
             response = self.session.get(
-                url=endpoints["queryRecord"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["queryRecord"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -345,7 +374,7 @@ class litUesr:
 
         # get the last record info
         last_record = self.fetch_last_record()
-        
+
         """
         # From: http//:<host>/web/#/healthForm Date: 2021-02-11 17:45:00
         mobile: '',
@@ -497,7 +526,8 @@ class litUesr:
             response = self.session.post(
                 url=endpoints["firstRecord"],
                 data=json.dumps(data),
-                headers=self.__headers, timeout=5,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -540,7 +570,10 @@ class litUesr:
 
         try:
             response = self.session.put(
-                url=endpoints["secondRecord"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["secondRecord"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -578,7 +611,10 @@ class litUesr:
 
         try:
             response = requests.put(
-                url=endpoints["thirdRecord"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["thirdRecord"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
@@ -596,7 +632,10 @@ class litUesr:
 
         try:
             response = self.session.put(
-                url=endpoints["password"], params=data, headers=self.__headers, timeout=5
+                url=endpoints["password"],
+                params=data,
+                headers=self.__headers,
+                timeout=5,
             )
         except:
             return None
