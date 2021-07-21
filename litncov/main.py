@@ -68,7 +68,7 @@ def main():
     testme = litUesr(args.username, args.password)
 
     # the report main
-    if testme.is_logged:
+    if testme.is_logged():
         console.log("[bold cyan]Login successful[/bold cyan]")
 
         if args.command == "report":
