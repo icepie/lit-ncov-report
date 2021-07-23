@@ -34,8 +34,6 @@ class litUesr:
         #    # "muyun_sign_cookie": "7034bbc44c88bcb8781dae8af9e474ca"
         # }
 
-        self.proxies = None
-
         # login the acconut
         try:
             # self.__set_cookies()
@@ -610,7 +608,7 @@ class litUesr:
             print("Warning: Incorrect temperatureThree!")
 
         try:
-            response = requests.put(
+            response = self.session.put(
                 url=endpoints["thirdRecord"],
                 params=data,
                 headers=self.__headers,
